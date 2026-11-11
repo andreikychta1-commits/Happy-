@@ -1,0 +1,4 @@
+.scene[hidden] { display:none; }
+body.is-site-page { overflow:hidden; }
+.site-frame { position:fixed; inset:0; z-index:2; width:100%; height:100%; border:0; background:#08081a; }
+.open-player.is-playing .button-icon { color:#fff5de; background:#a34251; }

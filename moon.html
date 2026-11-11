@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#070b1b" />
+    <title>Наша луна</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Unbounded:wght@400;600;700&display=swap");
+      :root { --night:#1b1407; --moon:#fffeee; --mist:#eeeab7; --gold:#ffd77a; }
+      * { box-sizing:border-box; }
+      html,body { min-height:100%; margin:0; }
+      body { overflow:hidden; color:#f8f4eb; font-family:Unbounded,system-ui,sans-serif; background:#070b1b; }
+      .night { position:relative; isolation:isolate; display:grid; min-height:100svh; place-items:center; padding:28px; overflow:hidden; background:radial-gradient(circle at 50% 42%,#24385f 0, #101a38 29%, #070b1b 72%); }
+      .night::before,.night::after { position:absolute; z-index:-2; inset:0; content:""; pointer-events:none; }
+      .night::before { opacity:.75; background-image:radial-gradient(circle at 8% 22%,#fff 0 1px,transparent 2px),radial-gradient(circle at 17% 72%,#d4e2ff 0 1px,transparent 2px),radial-gradient(circle at 27% 13%,#fff 0 1.5px,transparent 2.5px),radial-gradient(circle at 72% 16%,#fff 0 1px,transparent 2px),radial-gradient(circle at 88% 68%,#d4e2ff 0 1px,transparent 2px),radial-gradient(circle at 92% 28%,#fff 0 1px,transparent 2px); }
+      .night::after { z-index:-1; opacity:.16; background:url("chinese-garden-pixel.webp") center / cover no-repeat; filter:blur(3px) saturate(.55); }
+      .back { position:absolute; top:28px; left:28px; color:#fff4cf; font-family:"Press Start 2P",monospace; font-size:clamp(.48rem,1vw,.65rem); line-height:1.5; text-decoration:none; text-shadow:0 0 12px #111b37; }
+      .back:hover { color:var(--gold); }
+      .moon { position:relative; display:grid; width:min(72vw,690px); aspect-ratio:1; padding:0; border:0; place-items:end center; cursor:pointer; color:inherit; font:inherit; background:transparent; transition:transform .2s steps(3,end); }
+      .moon-image { position:absolute; inset:0; display:block; width:100%; height:100%; object-fit:contain; image-rendering:pixelated; filter:drop-shadow(0 0 10px rgba(255,241,172,.72)) drop-shadow(0 0 27px rgba(136,163,225,.3)); transition:transform .2s steps(3,end),filter .2s ease; }
+      .moon:hover,.moon:focus-visible { transform:translateY(-4px); }
+      .moon:hover .moon-image,.moon:focus-visible .moon-image { filter:drop-shadow(0 0 14px rgba(255,246,183,.95)) drop-shadow(0 0 40px rgba(153,183,255,.53)); transform:scale(1.035); }
+      .moon-title { position:relative; z-index:1; margin:0 0 clamp(34px,8vh,70px); padding:0 22px; color:#202b50; font-size:clamp(1.05rem,2.1vw,1.55rem); font-weight:700; line-height:1.5; text-align:center; text-shadow:0 1px rgba(255,255,255,.45); }
+      .memory { position:fixed; z-index:4; inset:0; display:grid; place-items:center; padding:24px; visibility:hidden; opacity:0; pointer-events:none; background:rgba(1,4,14,.82); transition:opacity .32s ease,visibility 0s linear .32s; }
+      .memory.open { visibility:visible; opacity:1; pointer-events:auto; transition:opacity .32s ease; }
+      .memory-card { position:relative; width:min(746px,100%); padding:10px; border:3px solid #fff4cf; opacity:0; background:#1c294d; box-shadow:12px 12px 0 rgba(0,0,0,.38); transform:scale(.78) rotate(-2deg); }
+      .memory.open .memory-card { animation:memory-open .7s cubic-bezier(.18,.9,.24,1.22) forwards; }
+      .memory-card img { display:block; width:100%; max-height:75svh; object-fit:contain; }
+      .close { position:absolute; top:-14px; right:-14px; width:34px; height:34px; border:2px solid #fff4cf; border-radius:50%; cursor:pointer; color:#33331d; font:700 1.1rem/1 Unbounded,sans-serif; background:#ffd77a; }
+      .starfall { position:fixed; z-index:5; inset:0; overflow:hidden; pointer-events:none; }
+      .falling-star { position:absolute; top:var(--top,-28px); left:var(--left); color:var(--star-color); font-family:Georgia,serif; font-size:var(--size,14px); line-height:1; opacity:0; text-shadow:0 0 5px currentColor,0 0 12px currentColor; animation:star-fall var(--duration) var(--delay) linear forwards; }
+      .opening-effects { position:fixed; z-index:6; inset:0; overflow:hidden; pointer-events:none; }
+      .moon-flash { position:absolute; inset:0; background:radial-gradient(circle at 50% 50%,rgba(255,252,224,.95) 0 2%,rgba(255,213,169,.52) 15%,rgba(255,170,204,.16) 34%,transparent 64%); animation:moon-flash .8s ease-out forwards; }
+      .sparkle { position:absolute; top:50%; left:50%; color:var(--sparkle-color); font-family:"Press Start 2P",monospace; font-size:var(--sparkle-size); line-height:1; opacity:0; text-shadow:0 0 8px currentColor,0 0 18px currentColor; animation:sparkle-burst var(--sparkle-duration) var(--sparkle-delay) cubic-bezier(.15,.7,.24,1) forwards; }
+      @keyframes memory-open { 0% { opacity:0; transform:scale(.72) rotate(-4deg); filter:brightness(1.9); } 55% { opacity:1; transform:scale(1.035) rotate(.7deg); filter:brightness(1.2); } 100% { opacity:1; transform:scale(1) rotate(0); filter:brightness(1); } }
+      @keyframes star-fall { 0% { opacity:0; transform:translate3d(0,-5vh,0) rotate(0) scale(.7); } 8% { opacity:.9; } 28% { transform:translate3d(var(--sway),25vh,0) rotate(75deg) scale(1); } 52% { opacity:.62; transform:translate3d(var(--crosswind),52vh,0) rotate(175deg) scale(.9); } 76% { opacity:1; transform:translate3d(var(--drift),82vh,0) rotate(270deg) scale(.82); } 100% { opacity:0; transform:translate3d(calc(var(--drift) + var(--sway)),111vh,0) rotate(360deg) scale(.65); } }
+      @keyframes moon-flash { 0% { opacity:0; transform:scale(.72); } 24% { opacity:1; } 100% { opacity:0; transform:scale(1.35); } }
+      @keyframes sparkle-burst { 0% { opacity:0; transform:translate(-50%,-50%) scale(.2) rotate(0); } 18% { opacity:1; } 100% { opacity:0; transform:translate(calc(-50% + var(--move-x)),calc(-50% + var(--move-y))) scale(1.25) rotate(var(--twist)); } }
+      button:focus-visible,a:focus-visible { outline:3px solid #fff; outline-offset:4px; }
+      @media (max-width:650px) { .night { align-items:center; padding:80px 20px 140px; } .back { top:22px; left:20px; } .moon { width:min(90vw,560px); } }
+      @media (prefers-reduced-motion:reduce) { *,*::before,*::after { animation:none !important; transition-duration:.01ms !important; } }
+    </style>
+    <link rel="stylesheet" href="site-polish.css?v=chapter-1" />
+  </head>
+  <body class="moon-page">
+    <main class="night">
+      <a class="back" href="cosmos.html">← вернуться в сад</a>
+      <div class="moon-heading" data-reveal><p>Где бы ты ни была</p><h1>У нас одна луна.</h1></div>
+      <div class="moon-viewport" id="moon-viewport" role="region" aria-label="Луна крупным планом" tabindex="0">
+        <button class="moon" id="open-memory" type="button" aria-label="Открыть фото-воспоминание" aria-haspopup="dialog"><img class="moon-image" src="pixel-moon.png" alt="" aria-hidden="true" /><span class="moon-title">ты всегда со мной <br />а я всегда с тобой</span></button>
+      </div>
+    </main>
+    <div class="opening-effects" id="opening-effects" aria-hidden="true"></div>
+    <div class="memory" id="memory" role="dialog" aria-modal="true" aria-label="Картинка-воспоминание" aria-hidden="true" inert>
+      <div class="memory-card"><button class="close" id="close-memory" type="button" aria-label="Закрыть картинку">×</button><img src="moon-memory.jpg" alt="Коллаж с луной и фотографиями" /></div>
+    </div>
+    <div class="starfall" aria-hidden="true"></div>
+    <script>
+      const memory = document.getElementById('memory');
+      const openMemory = document.getElementById('open-memory');
+      const closeMemory = document.getElementById('close-memory');
+      const effects = document.getElementById('opening-effects');
+      const moonViewport = document.getElementById('moon-viewport');
+      let moonCenterFrame = 0;
+      function centerMoon() {
+        cancelAnimationFrame(moonCenterFrame);
+        moonCenterFrame = requestAnimationFrame(() => {
+          moonViewport.scrollLeft = Math.max(0, (moonViewport.scrollWidth - moonViewport.clientWidth) / 2);
+          moonViewport.scrollTop = Math.max(0, (moonViewport.scrollHeight - moonViewport.clientHeight) / 2);
+        });
+      }
+      new ResizeObserver(centerMoon).observe(moonViewport);
+      window.addEventListener('resize', centerMoon);
+      centerMoon();
+      let lastHoverStars = 0;
+      function makeStars(count = 32, fromButton = false) {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        const starfall = document.querySelector('.starfall');
+        const colors = ['#fff5cf', '#dce8ff', '#ffe6f0', '#ffffff'];
+        const symbols = ['✦', '✧', '✦', '⋆'];
+        const buttonBounds = openMemory.getBoundingClientRect();
+        for (let index = 0; index < count; index++) {
+          const star = document.createElement('span');
+          star.className = 'falling-star';
+          star.textContent = symbols[index % symbols.length];
+          const start = fromButton ? buttonBounds.left + buttonBounds.width * (.1 + Math.random() * .8) : Math.random() * window.innerWidth;
+          star.style.setProperty('--left', `${start}px`);
+          star.style.setProperty('--top', fromButton ? `${buttonBounds.top - 20 + Math.random() * 20}px` : `${-34 - Math.random() * 90}px`);
+          star.style.setProperty('--sway', `${-45 + Math.random() * 90}px`);
+          star.style.setProperty('--drift', `${-100 + Math.random() * 200}px`);
+          star.style.setProperty('--crosswind', `${-45 + Math.random() * 90}px`);
+          star.style.setProperty('--size', `${9 + Math.random() * 9}px`);
+          star.style.setProperty('--duration', `${14 + Math.random() * 8}s`);
+          star.style.setProperty('--delay', `${Math.random() * (fromButton ? .35 : 1.4)}s`);
+          star.style.setProperty('--star-color', colors[index % colors.length]);
+          star.addEventListener('animationend', () => star.remove(), { once:true });
+          starfall.appendChild(star);
+        }
+      }
+      function makeOpeningEffects() {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        effects.replaceChildren();
+        const flash = document.createElement('i');
+        flash.className = 'moon-flash';
+        effects.appendChild(flash);
+        const symbols = ['✦', '✧', '·', '✦'];
+        const colors = ['#fff4ba', '#ffd0df', '#bcd8ff', '#ffe8f3'];
+        for (let index = 0; index < 34; index++) {
+          const sparkle = document.createElement('i');
+          const angle = Math.random() * Math.PI * 2;
+          const distance = 90 + Math.random() * Math.min(window.innerWidth, window.innerHeight) * .43;
+          sparkle.className = 'sparkle';
+          sparkle.textContent = symbols[index % symbols.length];
+          sparkle.style.setProperty('--move-x', `${Math.cos(angle) * distance}px`);
+          sparkle.style.setProperty('--move-y', `${Math.sin(angle) * distance}px`);
+          sparkle.style.setProperty('--twist', `${-180 + Math.random() * 540}deg`);
+          sparkle.style.setProperty('--sparkle-size', `${8 + Math.random() * 15}px`);
+          sparkle.style.setProperty('--sparkle-duration', `${.8 + Math.random() * .75}s`);
+          sparkle.style.setProperty('--sparkle-delay', `${Math.random() * .16}s`);
+          sparkle.style.setProperty('--sparkle-color', colors[index % colors.length]);
+          sparkle.addEventListener('animationend', () => sparkle.remove(), { once:true });
+          effects.appendChild(sparkle);
+        }
+        flash.addEventListener('animationend', () => flash.remove(), { once:true });
+      }
+      function showMemory() { memory.inert = false; document.querySelector('.night').inert = true; memory.classList.add('open'); memory.setAttribute('aria-hidden', 'false'); makeOpeningEffects(); makeStars(48); closeMemory.focus(); }
+      function hideMemory() { document.querySelector('.night').inert = false; memory.inert = true; memory.classList.remove('open'); memory.setAttribute('aria-hidden', 'true'); openMemory.focus(); }
+      openMemory.addEventListener('click', showMemory);
+      openMemory.addEventListener('pointerenter', () => { if (Date.now() - lastHoverStars > 900) { makeStars(16, true); lastHoverStars = Date.now(); } });
+      openMemory.addEventListener('focus', () => { if (Date.now() - lastHoverStars > 900) { makeStars(16, true); lastHoverStars = Date.now(); } });
+      closeMemory.addEventListener('click', hideMemory);
+      memory.addEventListener('click', (event) => { if (event.target === memory) hideMemory(); });
+      document.addEventListener('keydown', (event) => { if (!memory.classList.contains('open')) return; if (event.key === 'Escape') hideMemory(); if (event.key === 'Tab') { event.preventDefault(); closeMemory.focus(); } });
+      makeStars(72);
+      window.setInterval(() => makeStars(10), 850);
+    </script>
+    <script src="site-polish.js?v=chapter-1" defer></script>
+  </body>
+</html>

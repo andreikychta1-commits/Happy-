@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#3f131a">
+  <title>Письмо для тебя — для Наташи</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@400;500;600;700&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+  <style>
+    :root { --wine:#511a20; --wine-deep:#3f131a; --paper:#f6ecda; --ink:#52282b; --gold:#d7b579; --muted:#d0b9a4; --line:rgba(221,184,126,.28); --serif:"Cormorant Garamond",Georgia,"Times New Roman",serif; --sans:Manrope,"Segoe UI",sans-serif; }
+    *,*::before,*::after { box-sizing:border-box; }
+    body { min-height:100vh; margin:0; color:var(--paper); background:radial-gradient(ellipse at 50% 0%,rgba(215,181,121,.16),transparent 55%),var(--wine-deep); font-family:var(--sans); font-size:14px; line-height:1.7; overflow-x:hidden; }
+    a { color:inherit; text-decoration:none; }
+    button { font:inherit; cursor:pointer; }
+    button:focus-visible,a:focus-visible { outline:2px solid var(--gold); outline-offset:6px; }
+    .wrap { width:min(760px,calc(100% - 32px)); margin-inline:auto; }
+    .header { display:flex; align-items:center; justify-content:space-between; gap:20px; min-height:96px; border-bottom:1px solid var(--line); font-size:11px; }
+    .header a { padding:10px 0; transition:color .2s; }
+    .header a:hover { color:var(--gold); }
+    .eyebrow { display:flex; align-items:center; gap:13px; margin:0; color:var(--gold); font-size:9px; font-weight:600; letter-spacing:.22em; text-transform:uppercase; }
+    .eyebrow::before { content:""; width:31px; height:1px; background:currentColor; }
+    main { padding:56px 0 80px; text-align:center; }
+    h1 { margin:0 0 10px; font-family:var(--serif); font-size:clamp(44px,8vw,76px); font-weight:400; line-height:1; letter-spacing:-.03em; }
+    h1 em { color:#e5c99a; }
+    .lead { margin:0 auto 44px; max-width:420px; color:var(--muted); font-size:12px; }
+
+    .envelope { position:relative; display:block; width:min(440px,100%); aspect-ratio:1.55; margin:0 auto; padding:0; border:0; background:none; perspective:900px; }
+    .envelope-body { position:absolute; inset:0; border:1px solid #b88d58; border-radius:3px; background:linear-gradient(160deg,#ecdcbf,#d9c29b); box-shadow:0 24px 50px rgba(20,3,7,.45); }
+    .envelope-body::before,.envelope-body::after { position:absolute; bottom:0; width:50%; height:62%; content:""; background:linear-gradient(160deg,#e4d1ae,#cfb689); }
+    .envelope-body::before { left:0; clip-path:polygon(0 0,100% 100%,0 100%); }
+    .envelope-body::after { right:0; clip-path:polygon(100% 0,100% 100%,0 100%); }
+    .flap { position:absolute; z-index:2; top:0; left:0; width:100%; height:58%; background:linear-gradient(180deg,#e2cda6,#c9ae7e); clip-path:polygon(0 0,100% 0,50% 100%); transform-origin:50% 0; transition:transform .8s cubic-bezier(.5,0,.2,1); }
+    .wax { position:absolute; z-index:3; top:45%; left:50%; display:grid; place-items:center; width:64px; height:64px; border-radius:50%; color:#ffe2a8; font-family:"Ma Shan Zheng",serif; font-size:30px; background:radial-gradient(circle at 35% 30%,#c4333c,#7d1420 70%); box-shadow:0 4px 10px rgba(60,5,12,.45),inset 0 0 0 4px rgba(255,210,150,.18); transform:translate(-50%,-50%); transition:opacity .4s ease,transform .4s ease; }
+    .envelope-hint { position:absolute; z-index:3; bottom:-38px; left:0; right:0; color:var(--muted); font-size:11px; letter-spacing:.08em; }
+    .envelope:hover .wax { transform:translate(-50%,-50%) scale(1.06); }
+    .is-open .flap { transform:rotateX(180deg); }
+    .is-open .wax,.is-open .envelope-hint { opacity:0; pointer-events:none; }
+
+    .letter { max-height:0; overflow:hidden; opacity:0; transition:max-height 1.2s ease,opacity .8s ease .3s,margin .8s ease; }
+    .is-open .letter { max-height:1600px; margin-top:-90px; opacity:1; }
+    .paper { position:relative; z-index:4; padding:clamp(34px,7vw,64px) clamp(24px,7vw,64px) 48px; color:var(--ink); text-align:left; border:1px solid #d7b579; background:radial-gradient(circle at 18% 22%,rgba(215,181,121,.12) 0 2px,transparent 2.6px),var(--paper); background-size:22px 22px,auto; box-shadow:0 30px 60px rgba(20,3,7,.45); outline:1px solid rgba(110,30,36,.35); outline-offset:-10px; }
+    .paper::after { position:absolute; right:22px; bottom:6px; color:rgba(168,23,34,.08); font-family:"Ma Shan Zheng",serif; font-size:9rem; line-height:1; content:"爱"; pointer-events:none; }
+    .greeting { margin:0 0 22px; font-family:var(--serif); font-size:clamp(28px,5vw,38px); font-style:italic; color:#7d1b22; }
+    .paper p { position:relative; z-index:1; margin:0 0 16px; font-family:var(--serif); font-size:clamp(18px,2.6vw,21px); line-height:1.65; }
+    .paper .sign { margin:30px 0 0; text-align:right; font-style:italic; color:#7d1b22; }
+    .paper .sign small { display:block; margin-top:2px; color:#9a705a; font-family:var(--sans); font-size:11px; font-style:normal; letter-spacing:.08em; }
+
+    .ending { margin-top:46px; display:flex; flex-wrap:wrap; justify-content:center; gap:14px; }
+    .ending a { display:inline-flex; align-items:center; min-height:50px; padding:0 22px; border:1px solid var(--gold); font-size:11px; font-weight:700; letter-spacing:.06em; transition:background .2s,color .2s; }
+    .ending a.primary { color:var(--wine-deep); background:var(--paper); border-color:var(--paper); }
+    .ending a:hover { color:var(--wine-deep); background:#ffefd1; }
+
+    .petal { position:fixed; top:-20px; z-index:10; width:12px; height:12px; border-radius:60% 0 60% 0; pointer-events:none; background:#e8a3ad; opacity:.85; animation:petal-fall var(--t) linear forwards; }
+    @keyframes petal-fall { to { transform:translate(var(--x),105vh) rotate(540deg); opacity:.2; } }
+    @media (max-width:520px) { .header { min-height:76px; } main { padding-top:40px; } .is-open .letter { margin-top:-60px; } }
+    @media (prefers-reduced-motion:reduce) { *,*::before,*::after { animation-duration:.01ms !important; transition-duration:.01ms !important; } }
+  </style>
+  <link rel="stylesheet" href="site-polish.css?v=chapter-1" />
+</head>
+<body>
+  <header class="header wrap">
+    <a href="lantern.html">← Обратно в сад желаний</a>
+    <p class="eyebrow">04 / Последняя глава</p>
+  </header>
+  <main class="wrap" id="scene">
+    <div data-reveal>
+      <h1>Письмо <em>для тебя</em></h1>
+      <p class="lead">Всё, что было до этого, — только дорога сюда.</p>
+    </div>
+
+    <button class="envelope" type="button" id="envelope" aria-controls="letter" aria-expanded="false">
+      <span class="envelope-body" aria-hidden="true"></span>
+      <span class="flap" aria-hidden="true"></span>
+      <span class="wax" aria-hidden="true">爱</span>
+      <span class="envelope-hint">Нажми на печать, чтобы открыть</span>
+    </button>
+
+    <section class="letter" id="letter" aria-live="polite" inert>
+      <article class="paper">
+        <!-- Текст письма можно менять: каждый абзац — отдельный <p>. -->
+        <p class="greeting">Моя Наташечка,</p>
+        <p>с днём рождения. Я сделал для тебя этот маленький мир — с фонариками, луной, садом и белым котёнком — потому что обычной открытки было бы мало для того, что я к тебе чувствую.</p>
+        <p>Ты — моё чудо. Рядом с тобой даже самая обычная ночь становится светлой, а самые простые дни — моими любимыми.</p>
+        <p>Я хочу встретить с тобой этот Новый год и каждый следующий. Хочу, чтобы мы жили вместе, смеялись, заботились друг о друге и радовались жизни. Что бы ни случилось — я на твоей стороне и всегда буду рядом.</p>
+        <p>Пусть в этом году сбудется всё, что ты загадала, и ещё немного сверху.</p>
+        <p class="sign">Люблю тебя бесконечно.<small>12 ноября · твой навсегда</small></p>
+      </article>
+      <nav class="ending" aria-label="Куда дальше">
+        <a class="primary" href="cosmos.html">Вернуться в волшебный сад</a>
+        <a href="index.html">Открыть открытку снова</a>
+      </nav>
+    </section>
+  </main>
+  <script>
+    (() => {
+      const envelope = document.getElementById('envelope');
+      const letter = document.getElementById('letter');
+      const scene = document.getElementById('scene');
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+      function petals() {
+        if (reduced.matches) return;
+        for (let i = 0; i < 36; i++) {
+          const petal = document.createElement('i');
+          petal.className = 'petal';
+          petal.style.left = `${Math.random() * 100}vw`;
+          petal.style.animationDelay = `${Math.random() * 1.6}s`;
+          petal.style.setProperty('--t', `${4 + Math.random() * 3}s`);
+          petal.style.setProperty('--x', `${-120 + Math.random() * 240}px`);
+          if (i % 3 === 0) petal.style.background = '#f3d29a';
+          document.body.appendChild(petal);
+          setTimeout(() => petal.remove(), 9000);
+        }
+      }
+      envelope.addEventListener('click', () => {
+        if (scene.classList.contains('is-open')) return;
+        scene.classList.add('is-open');
+        envelope.setAttribute('aria-expanded', 'true');
+        envelope.tabIndex = -1;
+        letter.inert = false;
+        petals();
+        setTimeout(() => letter.scrollIntoView({ behavior: reduced.matches ? 'auto' : 'smooth', block: 'start' }), 700);
+      });
+    })();
+  </script>
+  <script src="site-polish.js?v=chapter-1" defer></script>
+</body>
+</html>

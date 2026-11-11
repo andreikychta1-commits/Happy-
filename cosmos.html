@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="theme-color" content="#08081a" />
+    <title>Для тебя — волшебный сад</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Unbounded:wght@400;500;600;700&display=swap");
+      :root { --night:#08081a; --cream:#fff5de; --gold:#ffd477; --rose:#9f3444; --wine:#471526; --pink:#e8afae; }
+      * { box-sizing:border-box; }
+      html,body { min-height:100%; margin:0; background:var(--night); }
+      body { overflow-x:hidden; color:var(--cream); font-family:Unbounded,system-ui,sans-serif; }
+      button { font:inherit; }
+      .scene { position:relative; isolation:isolate; display:flex; align-items:center; min-height:100svh; padding:clamp(32px,6vw,92px); overflow:hidden; }
+      .scene::before { position:absolute; z-index:-5; inset:0; content:""; background:linear-gradient(90deg,rgba(3,7,20,.84),rgba(3,7,20,.59) 36%,rgba(3,7,20,.09) 73%,rgba(3,7,20,.23)),url("chinese-garden-pixel.webp") var(--garden-anchor,50%) center / cover no-repeat; }
+      .scene::after { position:absolute; z-index:-2; inset:0; content:""; pointer-events:none; background:linear-gradient(90deg,rgba(9,10,34,.46),transparent 48%),radial-gradient(ellipse at 17% 49%,rgba(55,75,139,.17),transparent 29%); }
+      .pixel-grid { display:none; }
+      .lantern-glow { position:absolute; z-index:-1; inset:0; pointer-events:none; opacity:.42; background:radial-gradient(circle at 76% 14%,rgba(255,147,59,.52) 0 2px,transparent 11px),radial-gradient(circle at 91% 28%,rgba(255,147,59,.45) 0 2px,transparent 12px),radial-gradient(circle at 72% 46%,rgba(255,147,59,.3) 0 2px,transparent 9px); filter:blur(.25px); animation:lantern-pulse 3.2s ease-in-out infinite alternate; }
+      .water-motion { display:none; }
+      .water-motion::before,.water-motion::after { display:none; }
+      .content { position:relative; z-index:1; width:min(680px,100%); }
+      .moon-link { position:absolute; z-index:2; display:block; border-radius:50%; cursor:zoom-in; }
+      .moon-link:focus-visible { outline:3px solid #fff5de; outline-offset:4px; }
+      .lantern-link { position:absolute; z-index:3; display:block; min-width:44px; min-height:44px; border-radius:38%; cursor:pointer; -webkit-tap-highlight-color:rgba(255,207,114,.25); }
+      .lantern-link::before { position:absolute; inset:4% -14% 25%; content:""; border-radius:50%; opacity:0; background:radial-gradient(ellipse,rgba(255,198,105,.3),transparent 70%); box-shadow:0 0 24px rgba(255,173,79,.3); transition:opacity .25s ease; }
+      .lantern-link:hover::before,.lantern-link:focus-visible::before { opacity:1; }
+      .lantern-link span { position:absolute; top:100%; right:0; width:max-content; max-width:150px; padding:8px 11px; border:1px solid rgba(255,211,131,.4); border-radius:3px; color:#ffe4ad; font-size:.65rem; line-height:1.5; background:rgba(42,15,27,.94); opacity:0; transform:translateY(-4px); transition:opacity .2s ease,transform .2s ease; pointer-events:none; }
+      .lantern-link:hover span,.lantern-link:focus-visible span { opacity:1; transform:translateY(0); }
+      .kicker { display:flex; align-items:center; gap:12px; margin:0 0 25px; color:#ffe0a0; font-family:"Press Start 2P",monospace; font-size:clamp(.47rem,1vw,.64rem); line-height:1.7; letter-spacing:.08em; text-transform:uppercase; text-shadow:2px 2px #44254d; }
+      .kicker::before { width:25px; height:6px; content:""; background:var(--gold); box-shadow:6px 0 var(--gold),14px 0 var(--gold); }
+      h1 { max-width:650px; margin:0; font-size:clamp(2.55rem,7.3vw,6.2rem); font-weight:700; letter-spacing:-.08em; line-height:.98; text-wrap:balance; text-shadow:4px 4px rgba(53,19,74,.45),0 0 35px rgba(215,188,255,.25); }
+      h1 span { color:var(--gold); }
+      .copy { max-width:550px; margin:30px 0 0; color:#ddd2f1; font-size:clamp(.89rem,1.55vw,1.05rem); font-weight:500; letter-spacing:-.025em; line-height:1.85; text-shadow:0 2px 9px #08081a; }
+      .copy strong { color:#fff6dc; }
+      .open-player { display:inline-flex; align-items:center; gap:14px; margin-top:36px; padding:9px 17px 9px 9px; border:2px solid #2d152a; cursor:pointer; color:#2c1733; font-size:clamp(.7rem,1.25vw,.82rem); font-weight:800; background:var(--gold); box-shadow:5px 5px #6c2c47,0 0 0 2px var(--gold); transition:transform .16s steps(2,end),box-shadow .16s steps(2,end); }
+      .open-player:hover { box-shadow:8px 8px #6c2c47,0 0 0 2px var(--gold); transform:translate(-3px,-3px); }
+      .open-player:active { box-shadow:2px 2px #6c2c47,0 0 0 2px var(--gold); transform:translate(3px,3px); }
+      .button-icon { display:grid; place-items:center; width:33px; height:33px; color:#fff0cd; font-family:"Press Start 2P",monospace; font-size:.72rem; background:#873247; box-shadow:inset -4px -4px #5b1d36,inset 3px 3px #d6706d; }
+      .signature { margin:36px 0 0; color:rgba(255,240,218,.77); font-family:"Press Start 2P",monospace; font-size:clamp(.48rem,1vw,.63rem); line-height:1.85; }
+
+      .player { position:fixed; z-index:10; top:50%; left:clamp(15px,4vw,62px); width:min(388px,calc(100vw - 30px)); padding:8px; opacity:0; pointer-events:none; background:#f3c66c; box-shadow:8px 8px #32152e,14px 14px rgba(0,0,0,.24); transform:translate(0,-50%); transition:opacity .16s ease; }
+      .player.is-open { opacity:1; pointer-events:auto; transform:translate(0,-50%); }
+      .player-shell { position:relative; overflow:hidden; padding:20px 20px 17px; border:3px solid #32152e; background:linear-gradient(135deg,#7e213a 0 47%,#57162d 48%); box-shadow:inset 4px 4px rgba(255,219,145,.22),inset -4px -4px rgba(25,5,23,.28); }
+      .player-shell::before { position:absolute; inset:6px; content:""; pointer-events:none; border:1px solid rgba(255,226,164,.5); }
+      .player-shell::after { position:absolute; top:-20px; right:-25px; width:122px; height:122px; content:""; opacity:.27; border:2px solid #ffd77a; transform:rotate(45deg); }
+      .close-player { position:absolute; z-index:3; top:13px; right:14px; width:28px; height:28px; border:2px solid #f5ce79; cursor:pointer; color:#ffeac2; font-family:"Press Start 2P",monospace; font-size:.68rem; background:#4a1128; box-shadow:3px 3px #2e0a20; }
+      .player-head { position:relative; z-index:1; margin:0 35px 15px 0; color:#ffe0a1; font-family:"Press Start 2P",monospace; font-size:.54rem; line-height:1.7; text-transform:uppercase; }
+      .player-head small { display:block; margin-top:3px; color:var(--pink); font-family:Unbounded,sans-serif; font-size:.58rem; font-weight:500; letter-spacing:0; text-transform:none; }
+      .deck { position:relative; z-index:1; display:grid; grid-template-columns:145px 1fr; gap:16px; align-items:center; }
+      .record-stage { display:grid; place-items:center; width:145px; height:145px; border:3px solid #d48b55; background:#321127; box-shadow:inset 4px 4px #541a31,inset -4px -4px #210a1d; }
+      .record { position:relative; width:111px; height:111px; border:5px solid #221224; border-radius:50%; background:repeating-radial-gradient(circle at 50% 50%,#2d263a 0 3px,#171225 4px 7px); box-shadow:0 0 0 3px #773148,0 0 0 5px #220c20; }
+      .record::before { position:absolute; top:50%; left:50%; width:41px; height:41px; content:""; border:3px solid #f6c96e; border-radius:50%; background:conic-gradient(#99344b 0 25%,#59203c 0 50%,#99344b 0 75%,#59203c 0); transform:translate(-50%,-50%); }
+      .record::after { position:absolute; top:50%; left:50%; width:8px; height:8px; content:""; border-radius:50%; background:#ffdfa0; box-shadow:0 0 0 3px #7b2941; transform:translate(-50%,-50%); }
+      .is-playing .record { animation:spin 2.9s linear infinite; }
+      .song-name { margin:0; color:#fff0c8; font-size:.79rem; font-weight:700; line-height:1.55; }
+      .song-detail { margin:6px 0 0; color:var(--pink); font-size:.59rem; line-height:1.6; }
+      .equalizer { display:flex; align-items:flex-end; gap:3px; height:25px; margin:13px 0 0; } .equalizer i { width:5px; height:var(--h); background:var(--gold); box-shadow:2px 0 #d87850; transform-origin:bottom; } .is-playing .equalizer i { animation:equalize .55s steps(2,end) infinite alternate; animation-delay:var(--d); }
+      .player-controls { position:relative; z-index:1; display:flex; gap:9px; margin-top:18px; }
+      .start,.stop { flex:1; min-height:43px; border:2px solid #2c1329; cursor:pointer; font-family:"Press Start 2P",monospace; font-size:.53rem; line-height:1.45; box-shadow:3px 3px #2d1127; }
+      .start { color:#35182e; background:#f9cf76; } .stop { color:#f8d7ad; background:#4b1430; }
+      .status { position:relative; z-index:1; min-height:21px; margin:12px 0 0; color:#eec3b8; font-size:.58rem; line-height:1.55; text-align:center; }
+      button:focus-visible,a:focus-visible { outline:3px solid #fff; outline-offset:4px; }
+      @keyframes lantern-pulse { to { opacity:.72; filter:blur(1.4px); } }
+      @keyframes water-glimmer { to { background-position:850px 0; transform:translateX(-9%); } }
+      @keyframes spin { to { transform:rotate(360deg); } }
+      @keyframes equalize { to { transform:scaleY(.27); opacity:.55; } }
+      @media (max-width:650px) { .scene { align-items:flex-start; padding-top:114px; } .scene::before { background-position:var(--garden-anchor,66%) center; } .water-motion { height:28%; } .copy { max-width:440px; } .player { top:auto; bottom:0; left:0; width:min(420px,100%); transform:translate(0,0); } .player.is-open { transform:translate(0,0); } .player-shell { padding:16px 16px 13px; } .record-stage { width:123px; height:123px; } .record { transform:scale(.85); } .is-playing .record { animation-name:spin-small; } .deck { grid-template-columns:123px 1fr; gap:12px; } .back { top:22px; } }
+      @keyframes spin-small { to { transform:scale(.85) rotate(360deg); } }
+      @media (prefers-reduced-motion:reduce) { *,*::before,*::after { animation:none !important; transition-duration:.01ms !important; } }
+    </style>
+    <link rel="stylesheet" href="music-player.css?v=youtube-1" />
+    <link rel="stylesheet" href="site-navigation.css" />
+    <link rel="stylesheet" href="site-polish.css?v=chapter-1" />
+  </head>
+  <body class="garden-page">
+    <main class="scene">
+      <div class="music-atmosphere" aria-hidden="true"><div class="music-halo"></div><div class="music-notes" id="music-notes"></div></div>
+      <div class="pixel-grid" aria-hidden="true"></div><div class="lantern-glow" aria-hidden="true"></div><div class="water-motion" aria-hidden="true"></div>
+      <a class="moon-link" id="moon-link" href="moon.html" aria-label="Открыть страницу с луной"></a>
+      <a class="lantern-link" id="lantern-link" href="lantern.html" aria-label="Открыть сад желаний — нажми на фонарик"><span aria-hidden="true">Сад желаний ↗</span></a>
+      <section class="content" aria-labelledby="garden-title" data-reveal>
+        <p class="kicker">Каждый мир начинается с тебя</p>
+        <h1 id="garden-title"> Знай лишь <br />что мой мир всегда в твоём сердце  </h1>
+        <p class="copy">ты мой прекрасный <strong>Люблю тебя</strong></p>
+        <button class="open-player" type="button" id="open-player" hidden style="display:none" aria-controls="music-player" aria-expanded="false"><span class="button-icon">♫</span>музыка</button>
+      </section>
+    </main>
+    <aside class="player" id="music-player" aria-label="Музыкальный плеер" aria-hidden="true" inert>
+      <div class="player-shell">
+        <button class="close-player" type="button" id="close-player" aria-label="Закрыть плеер">×</button>
+        <p class="player-head">云中乐 ·<small>музыка</small></p>
+        <div class="deck"><div class="record-stage" aria-hidden="true"><div class="record"></div></div><div><p class="song-name" id="song-name">MY JEALOUSY</p><p class="song-detail">vivi baby · ovg!</p><span class="song-timestamp" id="track-clock">00:00 · начало</span><div class="equalizer" aria-hidden="true"><i style="--h:12px;--d:-.1s"></i><i style="--h:24px;--d:-.32s"></i><i style="--h:17px;--d:-.2s"></i><i style="--h:27px;--d:-.46s"></i><i style="--h:10px;--d:-.12s"></i><i style="--h:21px;--d:-.35s"></i></div></div></div>
+        <p class="listening-caption">Пусть этот миг будет только нашим.</p>
+        <div class="music-video"><div id="youtube-track" data-video-id="nbuCy7jS61Y">MY JEALOUSY · YouTube</div></div>
+        <div class="player-controls"><button class="start" type="button" id="start-track" aria-label="Включить MY JEALOUSY">▶ играть</button><button class="stop" type="button" id="stop-track" aria-label="Остановить музыку и вернуть к началу">■ стоп</button></div>
+        <p class="status" id="track-status" aria-live="polite">Нажми ▶ — заиграет MY JEALOUSY ♡</p>
+        <a class="music-source-link" href="https://www.youtube.com/watch?v=nbuCy7jS61Y" target="_blank" rel="noopener noreferrer">Открыть на YouTube ↗</a>
+        <div class="music-options"><button type="button" class="music-effects-toggle" id="toggle-music-effects" aria-pressed="true">✧ Атмосфера: вкл.</button></div>
+      </div>
+    </aside>
+    <button class="quick-music-stop" type="button" id="quick-stop-track" aria-label="Остановить музыку" hidden>■ стоп</button>
+    <script>
+      const scene = document.querySelector('.scene');
+      const moonLink = document.getElementById('moon-link');
+      const lanternLink = document.getElementById('lantern-link');
+      function positionSceneLinks() {
+        const bounds = scene.getBoundingClientRect();
+        // Match the actual garden image and its CSS background-position.
+        const sourceWidth = 1672;
+        const sourceHeight = 941;
+        const scale = Math.max(bounds.width / sourceWidth, bounds.height / sourceHeight);
+        let backgroundAnchorX = window.matchMedia('(max-width: 650px)').matches ? .66 : .5;
+        const horizontalCrop = sourceWidth * scale - bounds.width;
+        if (horizontalCrop > 0) {
+          const lanternRight = 1160 * scale + Math.max(22, 35 * scale);
+          backgroundAnchorX = Math.min(1, Math.max(backgroundAnchorX, (lanternRight - bounds.width + 16) / horizontalCrop));
+        }
+        scene.style.setProperty('--garden-anchor', `${backgroundAnchorX * 100}%`);
+        const offsetX = (bounds.width - sourceWidth * scale) * backgroundAnchorX;
+        const offsetY = (bounds.height - sourceHeight * scale) * .5;
+        const moonDiameter = Math.max(46, 108 * scale);
+        moonLink.style.width = `${moonDiameter}px`;
+        moonLink.style.height = `${moonDiameter}px`;
+        moonLink.style.left = `${offsetX + 1016 * scale - moonDiameter / 2}px`;
+        moonLink.style.top = `${offsetY + 168 * scale - moonDiameter / 2}px`;
+        const lanternWidth = Math.max(44, 70 * scale);
+        const lanternHeight = Math.max(60, 150 * scale);
+        lanternLink.style.width = `${lanternWidth}px`;
+        lanternLink.style.height = `${lanternHeight}px`;
+        lanternLink.style.left = `${offsetX + 1160 * scale - lanternWidth / 2}px`;
+        lanternLink.style.top = `${offsetY + 138 * scale - lanternHeight / 2}px`;
+      }
+      window.addEventListener('resize', positionSceneLinks);
+      new ResizeObserver(positionSceneLinks).observe(scene);
+      positionSceneLinks();
+    </script>
+    <script src="music-player.js?v=youtube-2"></script>
+    <script src="site-navigation.js"></script>
+    <script src="site-polish.js?v=chapter-1" defer></script>
+  </body>
+</html>

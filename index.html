@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#9c1720" />
+    <title>生日快乐 — </title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;700&family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;500;600;700;900&display=swap");
+      :root { --red:#a81722; --deep-red:#6f0e18; --gold:#e8bc5b; --gold-light:#ffe7a4; --ivory:#fff8e7; --ink:#35181a; }
+      * { box-sizing:border-box; }
+      body { min-height:100vh; margin:0; overflow-x:hidden; color:var(--ink); font-family:"Noto Serif SC","Times New Roman",serif; background-color:var(--deep-red); background-image:radial-gradient(ellipse at 50% 0%,rgba(244,197,94,.22),transparent 42%),linear-gradient(90deg,rgba(255,212,119,.04) 1px,transparent 1px),linear-gradient(rgba(255,212,119,.035) 1px,transparent 1px); background-size:auto,26px 26px,26px 26px; }
+      .corner { position:fixed; z-index:0; width:190px; height:190px; opacity:.48; border:1px solid var(--gold); }
+      .corner::before,.corner::after { position:absolute; width:100%; height:1px; content:""; background:var(--gold); }
+      .corner::before { top:19px; } .corner::after { bottom:19px; } .corner.tl { top:-72px; left:-72px; transform:rotate(45deg); } .corner.br { right:-72px; bottom:-72px; transform:rotate(45deg); }
+      main { position:relative; z-index:1; display:grid; place-items:center; min-height:100vh; padding:34px 18px; }
+      .card { position:relative; width:min(730px,100%); min-height:650px; overflow:hidden; padding:clamp(32px,6vw,62px) clamp(24px,8vw,84px) 40px; text-align:center; background:radial-gradient(circle at 17% 21%,rgba(230,182,82,.12) 0 2px,transparent 2.6px),radial-gradient(circle at 82% 75%,rgba(230,182,82,.1) 0 2px,transparent 2.6px),var(--ivory); background-size:21px 21px,27px 27px,auto; border:2px solid var(--gold); outline:1px solid rgba(96,10,20,.75); outline-offset:-10px; box-shadow:0 28px 64px rgba(18,0,2,.4),inset 0 0 35px rgba(187,125,27,.11); }
+      .card::before,.card::after { position:absolute; color:rgba(168,23,34,.08); font-family:"Ma Shan Zheng",cursive; font-size:16rem; line-height:1; content:"福"; pointer-events:none; }
+      .card::before { top:74px; left:-42px; transform:rotate(-13deg); } .card::after { right:-42px; bottom:-14px; transform:rotate(16deg); }
+      .lantern { position:absolute; z-index:2; top:-10px; width:66px; height:82px; border:2px solid #c37c2b; border-radius:50% 50% 42% 42%; background:repeating-linear-gradient(90deg,#b41723 0 7px,#d93335 8px 12px); box-shadow:inset 8px 0 12px rgba(255,220,100,.18),0 7px 15px rgba(104,12,17,.22); }
+      .lantern::before { position:absolute; top:-42px; left:31px; width:2px; height:40px; content:""; background:var(--gold); }
+      .lantern::after { position:absolute; bottom:-39px; left:29px; width:8px; height:40px; content:""; border-bottom:10px solid var(--gold); background:repeating-linear-gradient(90deg,var(--gold) 0 1px,transparent 1px 3px); }
+      .lantern.left { left:35px; transform:rotate(-4deg); animation:swing 4.6s ease-in-out infinite alternate; } .lantern.right { right:35px; transform:rotate(4deg); animation:swing 4.6s -2.3s ease-in-out infinite alternate-reverse; }
+      .lantern-character { display:grid; place-items:center; height:100%; color:var(--gold-light); font-family:"Ma Shan Zheng",cursive; font-size:2.1rem; text-shadow:0 1px #8a111b; }
+      .samurai { position:absolute; z-index:1; bottom:-22px; width:86px; height:142px; opacity:.23; pointer-events:none; } .samurai.left-guard { left:14px; } .samurai.right-guard { right:14px; transform:scaleX(-1); } .samurai::before { position:absolute; top:14px; left:27px; width:33px; height:37px; content:""; border:3px solid #6f0e18; border-radius:47% 47% 40% 40%; background:linear-gradient(#b11c25 0 25%,#f5d696 26% 31%,#6f0e18 32%); box-shadow:0 -12px 0 -4px #b11c25; } .samurai::after { position:absolute; bottom:0; left:12px; width:63px; height:92px; content:""; border:3px solid #6f0e18; border-bottom:0; background:repeating-linear-gradient(90deg,#a71924 0 8px,#cf8c42 8px 10px); clip-path:polygon(20% 0,80% 0,100% 100%,0 100%); } .samurai .sword { position:absolute; z-index:2; right:-9px; top:47px; width:6px; height:109px; border:1px solid #a5792e; border-radius:99px; background:#e5d4ad; transform:rotate(31deg); } .samurai .sword::before { position:absolute; top:12px; left:-8px; width:20px; height:4px; content:""; background:#a81722; }
+      .seal { display:grid; place-items:center; width:70px; height:70px; margin:17px auto 22px; color:var(--gold-light); font-family:"Ma Shan Zheng",cursive; font-size:2.15rem; border:2px solid var(--gold-light); border-radius:4px; background:var(--red); transform:rotate(5deg); box-shadow:3px 3px 0 rgba(74,8,15,.16); }
+      .seal span { border:1px solid var(--gold-light); padding:0 5px; line-height:1.08; }
+      .date { position:relative; z-index:3; margin:0 0 15px; color:#8d1520; font-family:"Comfortaa",sans-serif; font-size:.72rem; font-weight:700; letter-spacing:.2em; }
+      .symbol-line { display:flex; align-items:center; justify-content:center; gap:14px; margin:0 0 14px; color:#8d1520; font-size:.75rem; letter-spacing:.18em; }
+      .symbol-line::before,.symbol-line::after { width:54px; height:1px; content:""; background:linear-gradient(90deg,transparent,#c09548); } .symbol-line::after { transform:scaleX(-1); }
+      h1 { margin:0; color:var(--red); font-family:"Ma Shan Zheng","Noto Serif SC",serif; font-size:clamp(3.5rem,12vw,7.1rem); font-weight:400; line-height:.95; letter-spacing:.03em; text-shadow:2px 2px 0 rgba(211,166,62,.2); }
+      .translation { margin:16px 0 0; color:#7c2626; font-family:"Comfortaa",sans-serif; font-size:clamp(.82rem,2vw,.95rem); font-weight:700; letter-spacing:.13em; text-transform:uppercase; }
+      .divider { display:flex; align-items:center; justify-content:center; gap:10px; margin:26px auto 19px; color:#c08b30; font-size:1.15rem; } .divider::before,.divider::after { width:92px; height:1px; content:""; background:#d6ad5a; }
+      .message { max-width:500px; margin:0 auto; color:#4b2524; font-size:clamp(1rem,2.3vw,1.16rem); font-weight:500; line-height:1.9; } .message strong { color:var(--red); font-weight:700; } .message[contenteditable="true"] { cursor:text; border-bottom:1px dashed transparent; transition:background .2s ease,border-color .2s ease; } .message[contenteditable="true"]:hover,.message[contenteditable="true"]:focus { border-color:#d09b42; outline:0; background:rgba(255,231,164,.22); } .edit-note { margin:8px 0 0; color:#a87033; font-family:"Comfortaa",sans-serif; font-size:.67rem; }
+      .gift-area { margin-top:27px; } button { padding:14px 24px; border:1px solid #8f171f; border-radius:2px; cursor:pointer; color:var(--gold-light); font:700 .88rem "Noto Serif SC",serif; letter-spacing:.12em; background:linear-gradient(135deg,#c42a32,#8d111c); box-shadow:4px 4px 0 #e0b457; transition:transform .2s ease,box-shadow .2s ease; } button:hover { box-shadow:6px 6px 0 #e0b457; transform:translate(-2px,-2px); } button:active { box-shadow:2px 2px 0 #e0b457; transform:translate(2px,2px); }
+      .game-button { margin-top:17px; color:#8d1821; background:transparent; box-shadow:3px 3px 0 #e0b457; }
+      .cat-game { max-height:0; margin-top:0; overflow:hidden; opacity:0; transition:max-height .7s ease,opacity .5s ease,margin .5s ease; } .cat-game.open { max-height:650px; margin-top:29px; opacity:1; }
+      .game-title { margin:0 auto 8px; color:#8b1823; font-family:"Ma Shan Zheng",cursive; font-size:clamp(1.5rem,5vw,2.2rem); line-height:1.25; } .game-translation { margin:0 auto 18px; max-width:430px; color:#65332d; font-family:"Comfortaa",sans-serif; font-size:.73rem; line-height:1.55; }
+      .cat-picture { display:grid; grid-template-columns:repeat(4,1fr); gap:9px; max-width:480px; margin:0 auto; padding:14px; border:1px solid #d6ad5a; background:linear-gradient(135deg,rgba(255,235,177,.6),rgba(255,249,231,.45)); }
+      button.cat { position:relative; display:grid; place-items:center; min-height:83px; padding:0; overflow:hidden; border:1px solid rgba(150,60,45,.2); border-radius:4px; color:inherit; background:#f8e7cd; box-shadow:none; transition:transform .18s ease,background .18s ease; } button.cat:hover { background:#ffeecb; box-shadow:none; transform:translateY(-3px) rotate(-2deg); } button.cat:active { transform:scale(.96); }
+      .cat img { display:block; width:100%; height:100%; object-fit:cover; aspect-ratio:1 / 1; border-radius:4px; filter:saturate(1.05) contrast(1.05); }
+      .cat span { display:none; }
+      .cat:nth-child(2) { background:#e9d8cf; } .cat:nth-child(3) { background:#f5d9bd; } .cat:nth-child(4) { background:#e5dfd4; } .cat:nth-child(5) { background:#f3d0d2; } .cat:nth-child(6) { background:#e6d8c0; } .cat:nth-child(7) { background:#d9dfd7; }
+      button.special { background:#fbfbf5; }
+      .cat-hint { min-height:21px; margin:14px 0 0; color:#8d1821; font-family:"Comfortaa",sans-serif; font-size:.75rem; } .final-surprise { max-height:0; overflow:hidden; opacity:0; transition:max-height .6s ease,opacity .5s ease,margin .5s ease; } .final-surprise.show { max-height:260px; margin-top:22px; opacity:1; } .final-surprise p { margin:0; color:#8b1823; font-family:"Ma Shan Zheng",cursive; font-size:clamp(1.4rem,4.5vw,2.1rem); line-height:1.2; } .final-surprise small { display:block; margin-top:7px; color:#5e342e; font-family:"Comfortaa",sans-serif; font-size:.72rem; line-height:1.5; } .tiny-link { display:inline-block; margin-top:12px; padding:7px 14px; border:1px solid #b77a22; border-radius:999px; color:#7d1b22; font:700 .7rem "Comfortaa",sans-serif; letter-spacing:.08em; text-decoration:none; background:rgba(255,245,217,.8); box-shadow:0 3px 0 rgba(155,104,24,.18); transition:transform .2s ease, box-shadow .2s ease; } .tiny-link:hover { transform:translateY(-1px); box-shadow:0 5px 0 rgba(155,104,24,.18); } .tiny-link:active { transform:translateY(1px); }
+      .secret { max-height:0; margin:0 auto; overflow:hidden; opacity:0; transition:max-height .6s ease,opacity .55s ease,margin .55s ease; } .secret.show { max-height:150px; margin-top:25px; opacity:1; }
+      .wish { margin:0; color:#8b1823; font-family:"Ma Shan Zheng",cursive; font-size:clamp(1.55rem,4.8vw,2.45rem); line-height:1.2; } .wish-translation { margin:9px 0 0; color:#6a3931; font-family:"Comfortaa",sans-serif; font-size:.75rem; line-height:1.5; }
+      .plum { position:absolute; z-index:2; width:106px; height:106px; opacity:.92; } .plum::before { position:absolute; top:49px; left:-12px; width:130px; height:4px; content:""; border-radius:99px; background:#744232; transform:rotate(-40deg); }
+      .blossom { position:absolute; width:19px; height:19px; border-radius:50% 50% 50% 0; background:#dc7381; box-shadow:inset -3px -3px rgba(125,25,36,.13); transform:rotate(-18deg); } .blossom::after { position:absolute; top:6px; left:6px; width:6px; height:6px; content:""; border-radius:50%; background:var(--gold-light); }
+      .plum.left { bottom:11px; left:11px; } .plum.right { top:122px; right:-27px; transform:scaleX(-1) rotate(-23deg); } .plum .blossom:nth-child(1) { top:21px; left:36px; } .plum .blossom:nth-child(2) { top:48px; left:58px; } .plum .blossom:nth-child(3) { top:61px; left:22px; transform:scale(.72) rotate(-18deg); } .plum .blossom:nth-child(4) { top:1px; left:72px; transform:scale(.65) rotate(-18deg); }
+      .confetti { position:fixed; inset:0; z-index:10; pointer-events:none; } .piece { position:fixed; top:-22px; width:9px; height:18px; border-radius:1px; animation:fall var(--duration) linear forwards; }
+      @keyframes swing { to { transform:rotate(4deg); } } @keyframes fall { to { transform:translate(var(--move),110vh) rotate(640deg); } }
+      @media (max-width:480px) { .card { min-height:630px; padding-top:61px; } .lantern { transform:scale(.73) !important; } .lantern.left { left:2px; } .lantern.right { right:2px; } .plum.right { right:-55px; } .samurai { display:none; } .cat-picture { gap:6px; padding:9px; } button.cat { min-height:68px; } .cat span { font-size:2.5rem; } } @media (prefers-reduced-motion:reduce) { *,*::before,*::after { animation-duration:.01ms !important; transition-duration:.01ms !important; } }
+    </style>
+    <link rel="stylesheet" href="site-polish.css?v=chapter-1" />
+  </head>
+  <body class="birthday-page">
+    <i class="corner tl" aria-hidden="true"></i><i class="corner br" aria-hidden="true"></i><div class="confetti" aria-hidden="true"></div>
+    <main>
+      <article class="card" data-reveal aria-label="Китайская поздравительная открытка">
+        <div class="lantern left" aria-hidden="true"><span class="lantern-character">福</span></div><div class="lantern right" aria-hidden="true"><span class="lantern-character">福</span></div><div class="samurai left-guard" aria-hidden="true"><i class="sword"></i></div><div class="samurai right-guard" aria-hidden="true"><i class="sword"></i></div>
+        <div class="plum left" aria-hidden="true"><i class="blossom"></i><i class="blossom"></i><i class="blossom"></i><i class="blossom"></i></div><div class="plum right" aria-hidden="true"><i class="blossom"></i><i class="blossom"></i><i class="blossom"></i><i class="blossom"></i></div>
+        <p class="date">12.11.2007</p><div class="seal" aria-label="Счастье и долголетие"><span>福<br>寿</span></div><p class="symbol-line">吉祥如意 · 武士の祝福</p>
+        <h1>生日快乐</h1><p class="translation">С днём рождения, Наташечка!</p><div class="divider" aria-hidden="true">✦</div>
+        <p class="message" id="birthday-message">Ты даришь незабываемые эмоции. Когда ты рядом, чувства неизменно вспыхивают, а земля кажется раем. <br>И мир вокруг прекрасен, но на мгновение я осознал: без тебя всё меркнет. </p>
+        <div class="gift-area">
+          <button type="button" id="gift-button" aria-controls="secret" aria-expanded="false">打开祝福</button>
+          <div class="secret" id="secret" aria-live="polite">
+            <p class="wish">愿你岁岁常欢愉</p>
+            <p class="wish-translation">с каждим днем с каждую ночь я думаю так как не думал никак думаю всегда что мечта ты моя </p>
+          </div>
+          <button type="button" class="game-button" id="cat-button" aria-controls="cat-game" aria-expanded="false">🐾 он здесь но кто? и где?</button>
+        </div>
+        <section class="cat-game" id="cat-game" aria-live="polite" inert>
+          <p class="game-title">Найди это так, как подсказывает тебе сердце. </p>
+          <p class="game-translation">Он смотрит куда-то сюда, прямо перед тобой, и ждёт только тебя.</p>
+          <div class="cat-picture" aria-label="Картина с котиками">
+            <button class="cat" type="button" aria-label="Рыжий котик"><img src="cats/cat-1.jpg" alt="Рыжий котик" /></button>
+            <button class="cat" type="button" aria-label="Серый котик"><img src="cats/cat-2.jpg" alt="Серый котик" /></button>
+            <button class="cat" type="button" aria-label="Полосатый котик"><img src="cats/cat-3.jpg" alt="Полосатый котик" /></button>
+            <button class="cat" type="button" aria-label="Чёрный котик"><img src="cats/cat-4.jpg" alt="Чёрный котик" /></button>
+            <button class="cat" type="button" aria-label="Спящий котик"><img src="cats/cat-5.jpg" alt="Спящий котик" /></button>
+            <button class="cat" type="button" aria-label="Игривый котик"><img src="cats/cat-6.jpg" alt="Игривый котик" /></button>
+            <button class="cat" type="button" aria-label="Котик с бантиком"><img src="cats/cat-7.jpg" alt="Котик с бантиком" /></button>
+            <button class="cat special" id="white-kitten" type="button" aria-label="Белый котёнок с голубыми глазами"><img class="cat-image" src="cats/cat-8.jpg" alt="Белый котёнок с голубыми глазами" /></button>
+          </div>
+          <p class="cat-hint" id="cat-hint">小提示：他很白很可爱，眼睛像天空一样蓝。</p>
+          <div class="final-surprise" id="final-surprise" inert>
+            <p>так я смотрел на тебя в первую нашу встречу   —  и так я буду смотреть на тебя пока смерть не разлучит нас </p>
+            <small>Пускай все твои желания сбываются. а я буду рядом с тобй и наблюдать как все твои мечти пилают ярким огнем </small>
+            <a class="tiny-link" href="cosmos.html">Я люблю тебя</a>
+          </div>
+        </section>
+      </article>
+    </main>
+    <script>
+      const button = document.getElementById('gift-button'); const secret = document.getElementById('secret'); const catButton = document.getElementById('cat-button'); const catGame = document.getElementById('cat-game'); const whiteKitten = document.getElementById('white-kitten'); const finalSurprise = document.getElementById('final-surprise'); const catHint = document.getElementById('cat-hint'); const message = document.getElementById('birthday-message'); const colors = ['#c62832','#e3b954','#8d1724','#f6d985','#e67e8d'];
+      function makeConfetti() { if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return; for (let i = 0; i < 62; i++) { const piece = document.createElement('i'); piece.className = 'piece'; piece.style.left = `${Math.random() * 100}vw`; piece.style.background = colors[i % colors.length]; piece.style.setProperty('--duration', `${2.2 + Math.random() * 1.6}s`); piece.style.setProperty('--move', `${-130 + Math.random() * 260}px`); document.querySelector('.confetti').appendChild(piece); setTimeout(() => piece.remove(), 4200); } }
+      button.addEventListener('click', () => { const opened = secret.classList.toggle('show'); button.setAttribute('aria-expanded', String(opened)); button.textContent = opened ? '愿你万事如意 · Ты моё небесное чудо' : '打开祝福 · Открыть пожелание'; if (opened) makeConfetti(); });
+      catButton.addEventListener('click', () => { const opened = catGame.classList.toggle('open'); catGame.inert = !opened; catButton.setAttribute('aria-expanded', String(opened)); catButton.textContent = opened ? '↟ Картина с котиками открыта' : '🐾 Найти котёнка'; if (opened) catGame.scrollIntoView({ behavior:'smooth', block:'nearest' }); });
+      document.querySelectorAll('.cat:not(.special)').forEach((cat) => cat.addEventListener('click', () => { catHint.textContent = 'Этот котик очень милый, но продолжай искать белого с голубыми глазами.'; }));
+      whiteKitten.addEventListener('click', () => { finalSurprise.classList.add('show'); finalSurprise.inert = false; catHint.textContent = ''; whiteKitten.disabled = true; makeConfetti(); });
+      // Текст поздравления зафиксирован, чтобы страница выглядела как готовая открытка.
+    </script>
+    <script src="site-polish.js?v=chapter-1" defer></script>
+  </body>
+</html>

@@ -1,0 +1,47 @@
+.paper-launch-dock { position:relative; display:flex; align-items:center; gap:22px; min-height:154px; margin:19px 0 15px; padding:5px 20px 6px 15px; isolation:isolate; }
+.paper-launch-dock::before { position:absolute; z-index:-1; inset:12px 1px 9px; content:""; background:#f8f1e2; border:1px solid #b7a18b4a; box-shadow:2px 3px 0 #b5a18b18; transform:rotate(-1deg); clip-path:polygon(0 3%,17% 1%,34% 2%,58% 0,78% 2%,100% 1%,99% 47%,100% 98%,81% 99%,60% 98%,37% 100%,16% 98%,1% 99%); }
+.paper-launch-dock::after { position:absolute; z-index:-1; left:31px; bottom:7px; width:48px; height:5px; content:""; border-radius:50%; background:#8a6a4826; filter:blur(3px); transition:opacity .4s,transform .6s; }
+.paper-launch-preview { display:block; flex:0 0 auto; width:92px; height:138px; object-fit:contain; filter:drop-shadow(3px 5px 2px #74554123); transform:none; transform-origin:50% 35%; transition:opacity .28s,transform .65s cubic-bezier(.24,.58,.25,1); }
+.paper-launch-copy { position:relative; padding:7px 0; }
+.paper-launch-copy > span { display:block; margin-bottom:9px; color:#a4896b; font-size:7px; letter-spacing:.19em; text-transform:uppercase; }
+.paper-launch-caption { max-width:210px; margin:0; color:#986b6d; font:400 clamp(20px,2.2vw,26px)/1.05 var(--serif,Georgia,serif); letter-spacing:-.025em; }
+.paper-launch-dock.is-releasing .paper-launch-preview { opacity:0; transform:translateY(-14px) rotate(2deg) scale(.97); }
+.paper-launch-dock.is-releasing::after { opacity:0; transform:scale(.4); }
+.launch-button { position:relative; display:flex; align-items:center; justify-content:space-between; gap:20px; min-height:56px; margin-top:0; padding:9px 18px 9px 22px; border:1px solid #ae878065; border-radius:1px; color:#87535c; background:#ead8cf; box-shadow:3px 4px 0 #b5937922,inset 0 0 0 4px #f8ead650; font-size:11px; font-weight:600; text-align:left; transition:background .2s,box-shadow .2s,transform .2s; }
+.launch-button::before { position:absolute; inset:5px; content:""; border:1px solid #a1777140; pointer-events:none; }
+.launch-button:hover:not(:disabled) { color:#75444f; background:#efdcd2; box-shadow:4px 6px 0 #b5937922,inset 0 0 0 4px #fff1de66; transform:translateY(-2px) rotate(-.35deg); }
+.launch-button:active:not(:disabled) { transform:translateY(1px); box-shadow:1px 1px 0 #b5937922; }
+.launch-button:disabled { opacity:.76; }
+.launch-button-art { display:block; flex:0 0 auto; width:24px; height:36px; object-fit:contain; filter:drop-shadow(1px 2px 1px #79533f25); }
+.launch-sky { position:fixed; z-index:9; inset:0; overflow:hidden; pointer-events:none; }
+.sky-lantern { position:absolute; left:0; top:0; bottom:auto; width:var(--size,92px); height:auto; aspect-ratio:2 / 3; opacity:0; transform-origin:50% 50%; filter:none; animation:paper-lantern-rise var(--flight,9000ms) linear var(--wait,0ms) both; }
+.paper-lantern-sway { position:relative; width:100%; height:100%; transform-origin:50% 27%; animation:paper-lantern-sway var(--sway-time,2900ms) ease-in-out var(--wait,0ms) infinite alternate; }
+.paper-lantern-sway::before { position:absolute; z-index:-1; inset:12% -8% 28%; content:""; border-radius:50%; background:radial-gradient(ellipse,#e6bd7640,transparent 69%); pointer-events:none; }
+.paper-lantern-image { display:block; width:100%; height:100%; object-fit:contain; filter:drop-shadow(3px 5px 2px #5c483127); }
+.paper-lantern-tag { position:absolute; top:57%; left:55%; max-width:none; padding:3px 7px 4px; color:#9a705a; background:#fcf3ddd9; border:1px solid #b09a6b55; box-shadow:1px 2px 0 #85643c12; font:400 8px/1.25 var(--serif,Georgia,serif); letter-spacing:.04em; white-space:nowrap; transform:rotate(-6deg); }
+.paper-launch-glow { position:absolute; left:var(--glow-x,50%); top:var(--glow-y,70%); width:190px; height:230px; border-radius:50%; pointer-events:none; background:radial-gradient(ellipse,#e7c78450,transparent 68%); opacity:0; transform:translate(-50%,-50%); animation:paper-launch-warmth 1800ms ease-out both; }
+@keyframes paper-lantern-rise {
+  0% { opacity:0; transform:translate3d(var(--start-x,0px),var(--start-y,100vh),0) scale(var(--start-scale,1)); }
+  8% { opacity:1; }
+  50% { opacity:.95; transform:translate3d(var(--mid-x,0px),var(--mid-y,35vh),0) scale(var(--mid-scale,.72)); }
+  100% { opacity:0; transform:translate3d(var(--end-x,0px),var(--end-y,-200px),0) scale(var(--end-scale,.24)); }
+}
+@keyframes paper-lantern-sway { from { transform:rotate(calc(var(--sway-turn,4deg) * -1)); } to { transform:rotate(var(--sway-turn,4deg)); } }
+@keyframes paper-launch-warmth { 0% { opacity:0; transform:translate(-50%,-50%) scale(.5); } 25% { opacity:.75; } 100% { opacity:0; transform:translate(-50%,-76%) scale(1.5); } }
+.motion-paused .launch-sky { display:none; }
+.motion-paused .paper-launch-preview,.motion-paused .paper-launch-dock::after,.motion-paused .launch-button { transition:none!important; }
+.motion-paused .paper-launch-dock.is-releasing .paper-launch-preview { opacity:1; transform:none; }
+.motion-paused .paper-launch-dock.is-releasing::after { opacity:1; transform:none; }
+.motion-paused .launch-button:hover,.motion-paused .launch-button:active { transform:none; }
+@media (prefers-reduced-motion:reduce) {
+  .launch-sky { display:none; }.paper-launch-preview,.paper-launch-dock::after,.launch-button { transition:none!important; }
+  .paper-launch-dock.is-releasing .paper-launch-preview { opacity:1; transform:none; }.paper-launch-dock.is-releasing::after { opacity:1; transform:none; }
+  .launch-button:hover:not(:disabled),.launch-button:active:not(:disabled) { transform:none!important; }
+}
+@media (max-width:850px) and (min-width:641px) { .paper-launch-dock { gap:12px; padding-inline:8px; }.paper-launch-caption { font-size:21px; }.paper-launch-copy > span { font-size:6px; letter-spacing:.1em; } }
+@media (max-width:640px) {
+  .paper-launch-dock { min-height:154px; gap:18px; margin:16px 0 16px; padding-inline:16px; }
+  .paper-launch-caption { max-width:185px; font-size:22px; }
+  .launch-button { width:100%; min-height:56px; padding-inline:18px; gap:14px; }.launch-button-art { width:22px; height:33px; }
+  .paper-lantern-tag { font-size:7px; padding:3px 5px; }.paper-launch-glow { width:150px; height:190px; }
+}

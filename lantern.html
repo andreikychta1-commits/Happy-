@@ -1,0 +1,630 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#511a20">
+  <meta name="description" content="Маленький сад света, тёплых слов и самых заветных желаний. Для Наташи.">
+  <title>Сад тысячи желаний — для Наташи</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root { --wine:#511a20; --wine-deep:#3f131a; --wine-light:#742b31; --paper:#f2e7d5; --ink:#52282b; --gold:#d7b579; --muted:#d0b9a4; --line:rgba(221,184,126,.28); --serif:"Cormorant Garamond",Georgia,"Times New Roman",serif; --sans:Manrope,"Segoe UI",sans-serif; }
+    *,*::before,*::after { box-sizing:border-box; }
+    html { scroll-behavior:smooth; scroll-padding-top:32px; }
+    body { margin:0; color:var(--paper); background:var(--wine); font-family:var(--sans); font-size:14px; line-height:1.7; }
+    body::before { position:fixed; z-index:20; inset:0; content:""; pointer-events:none; opacity:.045; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 150 150' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.77' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%23fff' filter='url(%23noise)' opacity='.7' d='M0 0h150v150H0z'/%3E%3C/svg%3E"); }
+    button,input { font:inherit; }
+    button,a,input { -webkit-tap-highlight-color:transparent; }
+    button,a { touch-action:manipulation; }
+    button { cursor:pointer; }
+    a { color:inherit; text-decoration:none; }
+    button:focus-visible,a:focus-visible,input:focus-visible { outline:2px solid currentColor; outline-offset:6px; }
+    button:disabled { cursor:wait; }
+    [hidden] { display:none !important; }
+    ::selection { background:var(--gold); color:var(--wine); }
+    .svg-defs { position:absolute; width:0; height:0; overflow:hidden; }
+    .skip-link { position:fixed; z-index:100; top:12px; left:12px; padding:10px 18px; transform:translateY(-160%); color:var(--wine); background:var(--paper); }
+    .skip-link:focus { transform:translateY(0); }
+    .page-top { position:relative; overflow:hidden; background:radial-gradient(ellipse at 82% 50%,rgba(171,74,51,.18),transparent 49%),var(--wine); }
+    .wrap { width:min(1280px,calc(100% - 112px)); margin-inline:auto; }
+    .header { position:relative; z-index:5; display:flex; align-items:center; justify-content:space-between; gap:28px; min-height:114px; border-bottom:1px solid var(--line); }
+    .brand { display:flex; align-items:center; gap:13px; }
+    .seal { display:grid; place-items:center; flex-shrink:0; width:36px; height:42px; border:1px solid var(--gold); border-radius:2px; color:var(--gold); font-family:serif; font-size:24px; line-height:1; }
+    .brand-name { color:var(--paper); font-family:var(--serif); font-size:22px; font-weight:500; line-height:1.1; }
+    .brand-name small { display:block; margin-top:7px; color:var(--muted); font-family:var(--sans); font-size:8px; letter-spacing:.23em; text-transform:uppercase; }
+    .nav { display:flex; flex-shrink:0; align-items:center; gap:32px; font-size:11px; }
+    .nav a { padding:10px 0; transition:color .2s; }
+    .nav a:hover { color:var(--gold); }
+    .nav-wish { border-bottom:1px solid var(--gold); }
+    .back-arrow { margin-right:10px; color:var(--gold); }
+    .hero { position:relative; display:grid; grid-template-columns:1.04fr 1fr; align-items:center; gap:30px; min-height:690px; padding-top:55px; padding-bottom:66px; }
+    .hero-copy { position:relative; z-index:3; min-width:0; padding-bottom:12px; }
+    .eyebrow { display:flex; align-items:center; gap:13px; margin:0 0 27px; color:var(--gold); font-size:9px; font-weight:600; letter-spacing:.22em; text-transform:uppercase; }
+    .eyebrow::before { content:""; width:31px; height:1px; background:currentColor; }
+    h1 { position:relative; margin:0 -65px 25px 0; font-family:var(--serif); font-size:clamp(56px,6.5vw,91px); font-weight:400; line-height:.99; letter-spacing:-.043em; }
+    h1 em { display:block; margin-top:9px; color:#e5c99a; font-weight:400; }
+    .hero-description { max-width:365px; margin:28px 0 31px; color:#ddc9b9; font-size:12px; line-height:1.95; }
+    .primary-link { display:inline-flex; align-items:center; justify-content:space-between; gap:28px; min-height:54px; padding:0 23px; color:var(--wine-deep); background:var(--paper); border:1px solid var(--paper); font-size:11px; font-weight:700; transition:background .2s,transform .2s; }
+    .primary-link:hover { background:#ffefd1; transform:translateY(-3px); }
+    .primary-link svg { width:25px; height:20px; }
+    .hero-footnote { display:flex; align-items:center; gap:12px; margin:30px 0 0; color:#c4a691; font-size:9px; letter-spacing:.02em; }
+    .hero-footnote span { color:var(--gold); font-size:17px; }
+    .hero-art { position:relative; align-self:stretch; display:grid; place-items:center; min-width:0; min-height:550px; padding:25px 20px 15px 45px; }
+    .moon-gate { position:relative; width:100%; max-width:422px; aspect-ratio:.89; padding:12px; border:1px solid rgba(224,184,117,.62); border-radius:220px 220px 7px 7px; transform:rotate(-3deg); box-shadow:0 25px 60px #250c1640; }
+    .moon-gate::before { position:absolute; inset:6px; content:""; border:1px solid rgba(224,184,117,.2); border-radius:inherit; }
+    .garden-window { position:relative; overflow:hidden; width:100%; height:100%; border-radius:210px 210px 3px 3px; background:#0d1928; }
+    .garden-window img { width:100%; height:100%; display:block; object-fit:cover; object-position:50% 32%; }
+    .garden-window::after { position:absolute; inset:0; content:""; pointer-events:none; background:linear-gradient(0deg,rgba(18,17,35,.37),transparent 45%),linear-gradient(90deg,rgba(40,24,26,.15),transparent); }
+    .gate-caption { position:absolute; bottom:40px; left:34px; z-index:2; color:#f7e6c6; font-family:var(--serif); font-size:21px; }
+    .gate-caption small { display:block; color:#e6c997; font-family:var(--sans); font-size:7px; letter-spacing:.25em; text-transform:uppercase; }
+    .gate-label { position:absolute; z-index:2; top:65px; right:-11px; padding:17px 11px; color:var(--paper); background:#803335; border:1px solid var(--gold); font-family:serif; font-size:19px; line-height:1.5; writing-mode:vertical-rl; letter-spacing:.2em; }
+    .orbit { position:absolute; z-index:0; width:500px; height:500px; top:10px; left:8px; border:1px solid rgba(216,174,107,.13); border-radius:50%; }
+    .orbit::before { position:absolute; top:65px; left:74px; width:5px; height:5px; content:""; background:var(--gold); transform:rotate(45deg); }
+    .hanging-lantern { position:absolute; z-index:4; top:-49px; right:9px; width:105px; height:243px; color:var(--gold); transform-origin:50% 0; animation:sway 6s ease-in-out infinite alternate; filter:drop-shadow(0 0 20px #da87392a); }
+    .hanging-lantern.small { top:auto; bottom:-12px; right:auto; left:9px; width:73px; height:169px; animation-delay:-3s; }
+    .branch { position:absolute; z-index:4; right:-85px; bottom:12px; width:280px; height:240px; color:#d49e93; pointer-events:none; }
+    .art-chinese { position:absolute; bottom:19px; right:-21px; color:#bf9270; font-family:serif; font-size:14px; writing-mode:vertical-rl; letter-spacing:.3em; }
+    .tiny-star { position:absolute; color:var(--gold); font-family:var(--serif); font-size:25px; }
+    .tiny-star.one { top:17%; left:7%; }
+    .tiny-star.two { bottom:4%; right:22%; font-size:18px; }
+    .hero-base { position:relative; display:flex; align-items:center; justify-content:space-between; gap:20px; padding:19px 0 22px; border-top:1px solid var(--line); color:#c5a991; font-size:8px; font-weight:500; letter-spacing:.16em; text-transform:uppercase; }
+    .hero-base .center-mark { position:absolute; left:50%; color:var(--gold); font-family:serif; font-size:15px; transform:translateX(-50%); }
+    .quiet-mode { display:inline-flex; align-items:center; gap:8px; padding:6px 0; border:0; color:inherit; background:none; font-size:inherit; letter-spacing:.1em; }
+    .quiet-mode::before { width:5px; height:5px; content:""; border:1px solid var(--gold); border-radius:50%; background:var(--gold); }
+    .quiet-mode[aria-pressed="true"]::before { background:transparent; }
+    .wishes { position:relative; overflow:hidden; padding:96px 0 100px; color:var(--ink); background:var(--paper); }
+    .wishes::before { position:absolute; top:40px; left:-50px; content:"願"; color:rgba(125,77,60,.038); font-family:serif; font-size:370px; line-height:1; }
+    .wish-layout { position:relative; display:grid; grid-template-columns:1.1fr 1fr; gap:110px; align-items:center; }
+    .wish-layout > * { min-width:0; }
+    .wishes .eyebrow { color:#8c583f; margin-bottom:21px; }
+    h2 { margin:0; font-family:var(--serif); font-size:clamp(39px,4.2vw,56px); font-weight:500; line-height:1.07; letter-spacing:-.035em; }
+    h2 em { font-weight:400; }
+    .wish-copy { max-width:396px; margin:22px 0 24px; color:#795950; font-size:12px; line-height:1.9; }
+    .wish-form { margin-top:29px; }
+    .wish-form label { display:block; margin-bottom:8px; color:#805e51; font-size:9px; letter-spacing:.1em; }
+    .wish-form label span { color:#947d6f; letter-spacing:0; }
+    .wish-input { display:block; width:100%; padding:12px 0 13px; border:0; border-bottom:1px solid #bca58d; border-radius:0; color:var(--ink); background:transparent; font-size:12px; }
+    .wish-input::placeholder { color:#998373; opacity:1; }
+    .wish-input:focus { border-bottom-color:var(--wine); }
+    .launch-button { display:flex; align-items:center; justify-content:space-between; gap:25px; min-height:53px; margin-top:24px; padding:0 23px; border:1px solid var(--wine); color:var(--paper); background:var(--wine); font-size:11px; font-weight:600; transition:background .2s,transform .2s; }
+    .launch-button:hover:not(:disabled) { background:var(--wine-light); transform:translateY(-2px); }
+    .launch-button:disabled { opacity:.76; }
+    .wish-status { min-height:24px; margin:12px 0 0; color:#79503d; font-size:10px; }
+    .letter-section { position:relative; padding:22px 0 12px; text-align:center; }
+    .letter-topline { display:flex; align-items:center; justify-content:center; gap:13px; margin:0 0 32px; color:#967157; font-size:8px; letter-spacing:.18em; text-transform:uppercase; }
+    .letter-topline::before,.letter-topline::after { width:32px; height:1px; content:""; background:#c5ac8e; }
+    .envelope-stage { --paper-space:340px; --paper-lift:210px; position:relative; width:min(345px,100%); margin:0 auto; padding-top:0; transition:padding-top .85s cubic-bezier(.22,.7,.26,1) .65s; }
+    .envelope { position:relative; width:100%; aspect-ratio:1.55; color:#e1c08d; perspective:1100px; transform:rotate(-5deg); transition:transform .55s ease; }
+    .envelope-stage:hover .envelope { transform:rotate(-2deg) translateY(-4px); }
+    .envelope-back { position:absolute; z-index:0; inset:0; border:1px solid #74313a; background:linear-gradient(165deg,#682731,#4b1724); box-shadow:0 19px 27px -13px #4e252a88; transition:box-shadow .55s; }
+    .envelope-back::before { position:absolute; inset:8px; content:""; border:1px solid #bd865b44; background:repeating-linear-gradient(135deg,transparent 0 8px,#d6ab7d07 8px 9px); }
+    .envelope-pocket { position:absolute; z-index:3; inset:0; pointer-events:none; background:linear-gradient(148deg,#8c3640 0 49.7%,#63212c 50%,#82303a 50.7%); clip-path:polygon(0 0,50% 57%,100% 0,100% 100%,0 100%); }
+    .envelope-pocket::before { position:absolute; inset:0; content:""; background:linear-gradient(0deg,#8a323c,#9a4249); clip-path:polygon(0 100%,50% 49%,100% 100%); }
+    .envelope-pocket::after { position:absolute; inset:0; content:""; background:linear-gradient(146deg,transparent 49.5%,#d6a57830 49.8%,transparent 50.1%),linear-gradient(214deg,transparent 49.5%,#43182530 49.8%,transparent 50.2%); }
+    .envelope-flap { position:absolute; z-index:4; top:0; left:0; width:100%; height:58%; transform-origin:50% 0; transform:rotateX(0deg); transform-style:preserve-3d; transition:transform .65s cubic-bezier(.4,0,.2,1) .65s,z-index 0s .65s; pointer-events:none; }
+    .flap-face { position:absolute; inset:0; clip-path:polygon(0 0,100% 0,50% 100%); backface-visibility:hidden; -webkit-backface-visibility:hidden; background:linear-gradient(165deg,#9b4148,#7d2a36); }
+    .flap-face::after { position:absolute; inset:1px 11px 10px; content:""; background:linear-gradient(180deg,#e2bb862f,transparent 75%); clip-path:polygon(0 0,100% 0,50% 100%); }
+    .flap-back { transform:rotateX(180deg); clip-path:polygon(0 100%,100% 100%,50% 0); background:linear-gradient(0deg,#732c36,#a95554); }
+    .flap-back::after { inset:10px 11px 1px; clip-path:polygon(0 100%,100% 100%,50% 0); }
+    .envelope-button { position:absolute; z-index:6; inset:0; display:block; width:100%; height:100%; margin:0; padding:0; border:0; color:var(--wine); background:transparent; }
+    .envelope-button:focus-visible { outline:2px solid #8a4e32; outline-offset:8px; }
+    .envelope-outline { position:absolute; z-index:2; inset:11px; border:1px solid #d5a97266; pointer-events:none; }
+    .envelope-outline::before,.envelope-outline::after { position:absolute; bottom:6px; color:#d5a972; content:"✧"; font-size:17px; }
+    .envelope-outline::before { left:8px; } .envelope-outline::after { right:8px; }
+    .envelope-seal { position:absolute; top:78%; left:50%; display:grid; place-items:center; width:48px; height:48px; border:1px solid #f5d39a; border-radius:50%; color:#7a3233; background:#d9b272; box-shadow:0 2px 9px #421b2455,inset 0 0 0 4px #d9b272,inset 0 0 0 5px #a77548; font-family:serif; font-size:24px; transform:translate(-50%,-50%) translateZ(1px); backface-visibility:hidden; -webkit-backface-visibility:hidden; }
+    .envelope-name { position:absolute; z-index:4; bottom:32px; right:24px; left:24px; font-family:var(--serif); font-size:22px; letter-spacing:.02em; pointer-events:none; }
+    .envelope-hint { margin:28px 0 0; color:#94745e; font-size:10px; }
+    .paper-window { position:absolute; z-index:2; right:-12px; bottom:0; left:-12px; height:calc(100% + var(--paper-space) + 45px); overflow:hidden; pointer-events:none; }
+    .letter-note { position:absolute; right:25px; bottom:14px; left:25px; margin:0; padding:40px 24px 27px; border:1px solid #d2b78f; border-radius:2px; color:#694539; background:linear-gradient(104deg,#fffcf2,#fbf2df 52%,#f5e8ce); box-shadow:0 12px 24px -12px #51242b66,0 2px 3px #694a3122; text-align:left; visibility:hidden; opacity:0; transform:translateY(calc(100% - 28px)) rotate(.8deg); transition:transform .75s cubic-bezier(.4,0,.2,1),opacity .2s .55s,visibility 0s .8s; pointer-events:none; }
+    .letter-note::before { position:absolute; inset:9px; content:""; border:1px solid #c8a47770; pointer-events:none; }
+    .letter-note::after { position:absolute; top:50%; right:1px; left:1px; height:3px; content:""; background:linear-gradient(#b8996930,#ffffffaa,transparent); pointer-events:none; }
+    .letter-ornament { display:block; margin-bottom:10px; color:#ad6e64; font-size:18px; letter-spacing:.35em; text-align:center; }
+    .letter-close { position:absolute; z-index:1; top:12px; right:12px; display:grid; place-items:center; width:32px; height:32px; padding:0; border:0; border-radius:50%; color:#9a7256; background:transparent; font-size:23px; line-height:1; }
+    .letter-close:hover { color:var(--wine); background:#d5bb9133; }
+    .letter-note h3 { margin:0 0 10px; color:var(--wine); font-family:var(--serif); font-size:28px; font-weight:500; }
+    .letter-note p { margin:0; font-size:12px; line-height:1.9; }
+    .letter-note .sign { margin-top:14px; color:#976d52; font-family:var(--serif); font-size:20px; font-style:italic; }
+    .letter-section.is-open .envelope-stage { padding-top:var(--paper-space); transition-delay:0s; }
+    .letter-section.is-open .envelope { transform:rotate(0deg); }
+    .letter-section.is-open .envelope-back { box-shadow:0 22px 35px -18px #4e252a99; }
+    .letter-section.is-open .envelope-flap { z-index:1; transform:rotateX(-178deg); transition:transform .68s cubic-bezier(.4,0,.2,1) .08s,z-index 0s .38s; }
+    .letter-section.is-open .letter-note { visibility:visible; opacity:1; transform:translateY(calc(-1 * var(--paper-lift))) rotate(0deg); transition:transform .88s cubic-bezier(.22,.8,.3,1) .46s,opacity .18s .46s,visibility 0s; pointer-events:auto; }
+    .motion-paused .envelope-stage,.motion-paused .envelope,.motion-paused .envelope-flap,.motion-paused .letter-note { transition:none !important; }
+    @media (max-width:640px) { .envelope-stage { max-width:310px; } .letter-note { padding:38px 21px 24px; } }
+    .closing { display:flex; align-items:center; justify-content:space-between; gap:30px; padding:34px 0; }
+    .closing p { margin:0; color:#d6bca0; font-family:var(--serif); font-size:20px; font-style:italic; }
+    .closing a { display:inline-flex; align-items:center; gap:15px; padding:8px 0; color:#d6bca0; font-size:10px; }
+    .closing a:hover { color:var(--paper); }
+    .floating-petals,.launch-sky { position:fixed; z-index:9; inset:0; overflow:hidden; pointer-events:none; }
+    .floating-petals { z-index:4; }
+    .petal { position:absolute; top:-30px; width:9px; height:14px; opacity:0; border-radius:95% 8% 90% 12%; background:#d49487; animation:petal-fall var(--duration) linear infinite; animation-delay:var(--delay); }
+    .motion-paused .petal { display:none; }
+    .motion-paused .hanging-lantern { animation:none; }
+    .motion-paused { scroll-behavior:auto; }
+    @keyframes sway { from { transform:rotate(-4deg); } to { transform:rotate(4deg); } }
+    @keyframes petal-fall { 0% { opacity:0; transform:translate3d(0,-20px,0) rotate(0); } 8% { opacity:.65; } 48% { transform:translate3d(90px,48vh,0) rotate(150deg); } 85% { opacity:.6; } 100% { opacity:0; transform:translate3d(-50px,105vh,0) rotate(320deg); } }
+    @keyframes note-reveal { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+    @media (min-width:1600px) { .hero { min-height:745px; } .hero-art { padding-left:50px; } .moon-gate { max-width:445px; } }
+    @media (max-width:1100px) { .wrap { width:calc(100% - 76px); } .hero { min-height:645px; gap:14px; } h1 { font-size:70px; } .hero-art { padding-left:25px; min-height:505px; } .moon-gate { max-width:370px; } .orbit { width:420px; height:420px; left:-10px; top:42px; } .hanging-lantern { right:-18px; width:90px; } .branch { right:-75px; width:240px; } .wish-layout { gap:65px; } }
+    @media (max-width:850px) { .wrap { width:calc(100% - 52px); } .header { min-height:96px; } .brand-name { font-size:20px; } .nav { gap:22px; font-size:10px; } .hero { min-height:580px; padding-top:42px; padding-bottom:38px; } h1 { font-size:58px; } .hero-description { font-size:11px; max-width:290px; } .hero-art { min-height:450px; padding-left:18px; padding-right:12px; } .moon-gate { aspect-ratio:.8; } .orbit { width:345px; height:345px; top:60px; } .gate-label { top:66px; right:-6px; font-size:15px; padding:12px 8px; } .gate-caption { left:23px; bottom:30px; font-size:18px; } .hanging-lantern { top:-44px; right:-19px; width:76px; height:202px; } .hanging-lantern.small { left:-3px; bottom:-23px; width:58px; height:157px; } .branch { right:-71px; bottom:18px; width:210px; } .art-chinese { right:-15px; bottom:-5px; font-size:12px; } .wish-layout { gap:42px; } .wishes { padding:75px 0 70px; } .wish-copy { font-size:11px; } h2 { font-size:43px; } .letter-section { align-self:center; } .envelope-name { font-size:20px; bottom:22px; } .letter-topline { font-size:7px; } .envelope-seal { width:41px; height:41px; font-size:22px; } }
+    @media (max-width:640px) { .wrap { width:calc(100% - 40px); } .header { min-height:88px; gap:15px; } .brand { gap:9px; } .seal { width:29px; height:35px; font-size:21px; } .brand-name { font-size:19px; } .brand-name small { font-size:6px; letter-spacing:.18em; margin-top:5px; } .nav { gap:0; } .nav-wish { display:none; } .nav a { font-size:10px; } .back-arrow { margin-right:5px; } .hero { grid-template-columns:1fr; gap:16px; padding-top:48px; padding-bottom:29px; } .hero-copy { padding-bottom:0; } .eyebrow { font-size:8px; letter-spacing:.17em; margin-bottom:22px; } h1 { margin-right:0; font-size:clamp(45px,12.5vw,72px); line-height:1; } h1 em { margin-top:3px; } .hero-description { max-width:340px; margin-top:21px; margin-bottom:23px; font-size:11px; } .primary-link { min-height:51px; padding-inline:20px; font-size:10px; gap:30px; } .hero-footnote { margin-top:18px; font-size:8px; } .hero-art { justify-self:center; width:min(440px,100%); min-height:425px; padding:27px 35px 8px; } .moon-gate { width:100%; max-width:305px; aspect-ratio:.88; } .orbit { top:39px; left:50%; width:340px; height:340px; transform:translateX(-50%); } .hanging-lantern { top:-20px; right:6px; width:74px; height:173px; } .hanging-lantern.small { bottom:-4px; left:13px; width:55px; height:142px; } .gate-label { top:70px; right:-11px; } .gate-caption { left:25px; bottom:30px; } .branch { right:-31px; bottom:2px; width:200px; height:192px; } .art-chinese { right:0; bottom:11px; font-size:11px; } .tiny-star.one { left:8px; top:17%; } .tiny-star.two { right:23%; bottom:0; } .hero-base { padding:15px 0; font-size:7px; letter-spacing:.1em; } .hero-base .center-mark { display:none; } .quiet-mode { letter-spacing:0; } .wishes { padding:57px 0 58px; } .wish-layout { grid-template-columns:1fr; gap:36px; } h2 { font-size:43px; } .wish-copy { max-width:390px; } .wish-form { margin-top:23px; } .wish-input { font-size:16px; } .launch-button { width:100%; font-size:11px; } .wish-status { margin-top:12px; font-size:10px; } .letter-section { padding-top:18px; border-top:1px solid #c6ad9280; } .letter-topline { margin-top:13px; margin-bottom:28px; font-size:8px; } .envelope-button { max-width:310px; } .envelope-name { font-size:23px; bottom:29px; } .envelope-seal { width:46px; height:46px; font-size:23px; } .envelope-hint { margin-top:25px; } .closing { flex-direction:column; gap:6px; padding:25px 0; text-align:center; } .closing p { font-size:19px; } .closing a { font-size:9px; } }
+    @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } *,*::before,*::after { animation:none !important; transition:none !important; } .floating-petals,.launch-sky { display:none; } }
+  </style>
+  <link rel="stylesheet" href="garden-portal.css">
+  <link rel="stylesheet" href="paper-lanterns.css">
+  <link rel="preload" as="image" href="paper-lantern-ivory.webp">
+    <link rel="stylesheet" href="site-polish.css?v=chapter-1" />
+</head>
+<body class="wishes-page">
+  <a class="skip-link" href="#main">К основному содержимому</a>
+  <svg class="svg-defs" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="lantern-red" x1="0" x2="1"><stop stop-color="#802a2c"/><stop offset=".45" stop-color="#d2643d"/><stop offset=".6" stop-color="#cf5b34"/><stop offset="1" stop-color="#74252d"/></linearGradient>
+      <radialGradient id="lantern-light"><stop stop-color="#ffecb0" stop-opacity=".7"/><stop offset="1" stop-color="#ffd278" stop-opacity="0"/></radialGradient>
+      <symbol id="hanging-lantern-art" viewBox="0 0 110 250">
+        <path d="M55 0v57" fill="none" stroke="#c29b60" stroke-width="1"/>
+        <path d="M34 57h42v10H34z" fill="#c39a60"/><path d="M34 61h42" stroke="#6d3026"/>
+        <path d="M36 67C5 83 5 125 35 143h40c31-18 31-60 0-76Z" fill="url(#lantern-red)" stroke="#d9aa63" stroke-width="1.3"/>
+        <ellipse cx="55" cy="107" rx="38" ry="39" fill="url(#lantern-light)"/>
+        <path d="M43 68c-15 24-15 50 0 75m24-75c15 24 15 50 0 75M55 67v76M18 90h74m-77 15h80m-76 17h72" stroke="#e6b575" stroke-opacity=".38" fill="none"/>
+        <path d="M34 143h42v9H34z" fill="#bd9354"/><path d="M55 152v13m-12 0h24M43 165v29m6-29v35m6-35v39m6-39v35m6-35v29" fill="none" stroke="#d8ac63" stroke-width="2"/>
+        <path d="M48 87h14v24H48zM51 91h8m-8 7h8m-8 7h8M55 84v30" fill="none" stroke="#ffe0a1" stroke-width="1.1"/>
+      </symbol>
+      <symbol id="blossom" viewBox="-15 -15 30 30"><path d="M0-2C-12-17-17-3-5 2c-14 5-3 17 3 6 4 14 16 6 9-3 15 2 12-12 2-10C15-17 0-19 0-2Z" fill="currentColor"/><circle r="2.5" fill="#e8c089"/><path d="M0-5v10m-5-7 10 4m-10 0 10-4" stroke="#f4dba6" stroke-width=".6"/></symbol>
+    </defs>
+  </svg>
+  <div class="page-top">
+    <header class="header wrap">
+      <a class="brand" href="#" aria-label="Сад тысячи желаний — начало страницы"><span class="seal" lang="zh" aria-hidden="true">願</span><span class="brand-name">Сад тысячи желаний<small>Маленькое чудо · только для тебя</small></span></a>
+      <nav class="nav" aria-label="Навигация"><a href="cosmos.html"><span class="back-arrow" aria-hidden="true">←</span>Обратно в сад</a><a class="nav-wish" href="#wish">Загадать желание <span aria-hidden="true">↗</span></a></nav>
+    </header>
+    <section class="hero wrap" id="main" aria-labelledby="hero-title">
+      <div class="hero-copy" data-reveal>
+        <p class="eyebrow">03 / Для моей любимой — ты всегда рядом</p>
+        <h1 id="hero-title">Пусть сбудется<em>самое тёплое.</em></h1>
+        <p class="hero-description">Есть место, где ночь пахнет цветами,<br>а фонарики берегут желания.<br>Но ни одна ночь не сравнится с тобой.</p>
+        <p class="hero-footnote"><span aria-hidden="true">✧</span>Одна тихая ночь. Тысяча поводов улыбнуться.</p>
+      </div>
+      <div class="hero-art" data-reveal>
+        <div class="orbit" aria-hidden="true"></div><span class="tiny-star one" aria-hidden="true">✧</span><span class="tiny-star two" aria-hidden="true">✧</span>
+        <div class="moon-gate"><div class="garden-window"><img src="lantern-portrait.jpg" alt="Девушка фотографирует красные китайские фонарики" width="567" height="1280"><div class="gate-caption"><small>Там, где есть волшебство</small> всегда будешь ты </div></div><span class="gate-label" lang="zh" aria-label="Пусть исполнятся желания">心想事成</span></div>
+        <svg class="hanging-lantern" viewBox="0 0 110 250" aria-hidden="true"><use href="#hanging-lantern-art"/></svg>
+        <svg class="hanging-lantern small" viewBox="0 0 110 250" aria-hidden="true"><use href="#hanging-lantern-art"/></svg>
+        <svg class="branch" viewBox="0 0 280 240" aria-hidden="true"><path d="M283 232C206 193 181 154 135 126S54 98 8 66M169 153c9-54-12-86-35-122M135 126C90 137 44 144 7 120M208 190c-46-4-77 8-106 26M88 111C57 84 51 56 56 23" fill="none" stroke="#b07b64" stroke-width="2"/><path d="m158 85 25-22m-68 60-9-33M52 135l-16 20M138 206l-16-20" fill="none" stroke="#b07b64" stroke-width="1.3"/><use href="#blossom" x="126" y="19" width="27" height="27"/><use href="#blossom" x="165" y="52" width="31" height="31"/><use href="#blossom" x="147" y="82" width="24" height="24"/><use href="#blossom" x="42" y="14" width="28" height="28"/><use href="#blossom" x="36" y="51" width="22" height="22"/><use href="#blossom" x="90" y="79" width="27" height="27"/><use href="#blossom" x="18" y="144" width="25" height="25"/><use href="#blossom" x="6" y="112" width="22" height="22"/><use href="#blossom" x="110" y="174" width="27" height="27"/><use href="#blossom" x="89" y="207" width="23" height="23"/><use href="#blossom" x="195" y="173" width="24" height="24"/></svg>
+        <span class="art-chinese" lang="zh" aria-hidden="true">岁岁平安 · 日日欢喜</span>
+      </div>
+    </section>
+    <div class="hero-base wrap"><span>Маленькое мгновение · большая любовь</span><span class="center-mark" lang="zh" aria-hidden="true">花 · 月 · 你</span><button class="quiet-mode" id="quiet-mode" type="button" aria-pressed="false">Тихий режим</button></div>
+  </div>
+  <section class="wishes" id="wish" aria-labelledby="wish-title">
+    <div class="wish-layout wrap">
+      <div>
+        <p class="eyebrow">Пусть самое заветное сбудется</p>
+        <h2 id="wish-title">У каждого желания<br>есть <em>свой свет.</em></h2>
+        <p class="wish-copy">Подумай о самом заветном — о том, от чего на душе становится тепло. А моя мечта уже со мной. Я вижу её каждый день, потому что ты всегда рядом.</p>
+        <form class="wish-form" id="wish-form">
+          <label for="wish-input">ТВОЁ ЖЕЛАНИЕ <span>· для меня закон </span></label>
+          <input class="wish-input" id="wish-input" name="wish" type="text" maxlength="160" autocomplete="off" placeholder="Я мечтаю о тебе. А ты — о чём?" aria-describedby="wish-status">
+          <div class="paper-launch-dock" id="paper-launch-dock" aria-hidden="true">
+            <img class="paper-launch-preview" id="paper-launch-preview" src="paper-lantern-rose.webp" alt="" width="1024" height="1536" decoding="async">
+            <div class="paper-launch-copy"><span>Маленький свет · большая мечта</span><p class="paper-launch-caption" id="paper-launch-caption">Пусть сбудется<br>самое заветное.</p></div>
+          </div>
+          <button class="launch-button" type="submit" id="launch-button" aria-busy="false"><span id="launch-label">Отпустить фонарик в небо</span><img class="launch-button-art" src="paper-lantern-rose.webp" alt="" width="24" height="36" aria-hidden="true"></button>
+          <p class="wish-status" id="wish-status" role="status" aria-live="polite">Пусть сбудется то, что делает тебя счастливой.</p>
+        </form>
+      </div>
+      <div class="letter-section" id="letter-section">
+        <p class="letter-topline">Ещё кое-что для тебя</p>
+        <div class="envelope-stage" id="envelope-stage">
+          <div class="envelope" id="envelope">
+            <div class="envelope-back" aria-hidden="true"></div>
+            <div class="paper-window">
+              <article class="letter-note" id="letter-note" aria-hidden="true" inert>
+                <button class="letter-close" id="letter-close" type="button" aria-label="Убрать открытку в конверт">×</button>
+                <span class="letter-ornament" aria-hidden="true">✧ ❀ ✧</span>
+                <h3>Моё маленькое чудо,</h3>
+                <p>Ты моё сердце и моя душа. Я вспоминаю те дни, когда мы познакомились, и берегу каждый момент рядом с тобой. Твой смех, твою улыбку, твои глаза, в которых я теряюсь, твой носик. Ты моя единственная, моё всё, моя жизнь.</p>
+                <p class="sign">Ты — мой самый тёплый свет. С днём рождения ♡</p>
+              </article>
+            </div>
+            <div class="envelope-pocket" aria-hidden="true"></div>
+            <span class="envelope-outline" aria-hidden="true"></span>
+            <div class="envelope-flap" aria-hidden="true"><span class="flap-face"></span><span class="flap-face flap-back"></span><span class="envelope-seal" lang="zh">愛</span></div>
+            <span class="envelope-name" aria-hidden="true">Для тебя, Наташа</span>
+            <button class="envelope-button" id="envelope-button" type="button" aria-expanded="false" aria-controls="letter-note" aria-label="Открыть письмо для Наташи"></button>
+          </div>
+        </div>
+        <p class="envelope-hint" id="envelope-hint"></p>
+      </div>
+    </div>
+  </section>
+  <section class="gp-section" id="secret-garden" aria-labelledby="gp-title">
+    <svg class="gp-defs" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><defs>
+      <linearGradient id="gp-gold" x2="1" y2="1"><stop stop-color="#fae5ad"/><stop offset=".4" stop-color="#d6af69"/><stop offset=".7" stop-color="#9b6d39"/><stop offset="1" stop-color="#eed394"/></linearGradient>
+      <linearGradient id="gp-roof" x2="0" y2="1"><stop stop-color="#95977e"/><stop offset=".55" stop-color="#81856e"/><stop offset="1" stop-color="#6e735f"/></linearGradient>
+      <pattern id="gp-lattice" width="80" height="80" patternUnits="userSpaceOnUse"><path d="M0 40h22V18h36v44H22V40h58M40 0v18m0 44v18" fill="none" stroke="#cca267" stroke-width="3"/><path d="M0 40 40 0 80 40 40 80Z" fill="none" stroke="#cca267" stroke-opacity=".3"/></pattern>
+      <pattern id="gp-paper-print" width="172" height="122" patternUnits="userSpaceOnUse">
+        <g fill="#786650" opacity=".2" font-family="Georgia,serif" font-size="7"><text x="8" y="12" font-size="10">ЛИСТЫ О ВЕСНЕ</text><text x="8" y="28">Свет остаётся между строк.</text><text x="8" y="40">И каждый маленький цветок</text><text x="8" y="52">хранит немного нежности.</text><text x="8" y="72">LE JARDIN · BOTANIQUE</text><text x="8" y="88">Les fleurs gardent la lumière.</text><text x="8" y="100">Une petite promesse de printemps.</text></g><path d="M8 17h151M8 108h151" stroke="#786650" stroke-opacity=".17"/>
+      </pattern>
+      <symbol id="gp-paper-door-front" viewBox="0 0 400 650">
+        <path d="M1 2 397 0 400 647 3 650Z" fill="#a2766b"/>
+        <path d="m8 10 381-3-2 633-375 3Z" fill="#eadfc9"/>
+        <path d="m19 19 362-2-3 615-357-1Z" fill="#966660"/>
+        <path d="M31 32h338v583H31z" fill="url(#gp-paper-print)" opacity=".7"/>
+        <path d="M45 46h310v257H45z" fill="#714e49"/>
+        <path d="m50 49 299 3 2 242-299 2Z" fill="#dad3b9"/>
+        <path d="M60 61h280v222H60z" fill="#a2a68c"/>
+        <path d="M60 61h280v222H60z" fill="url(#gp-lattice)"/>
+        <path d="M49 48h302v247H49zM60 61h280v222H60z" fill="none" stroke="#f2e8cf" stroke-width="2"/>
+        <path d="m48 331 304-5 4 272-310 5Z" fill="#74544a"/>
+        <path d="m45 325 306-3 1 273-307 4Z" fill="#e7ddc6"/>
+        <path d="M57 339h282v245H57z" fill="url(#gp-paper-print)"/>
+        <path d="M58 338h281v246H58z" fill="none" stroke="#b8a383"/>
+        <path d="M26 27h348v596H26zM41 312h318" fill="none" stroke="#cfb892" stroke-width="2"/>
+        <path d="M28 22h18m-18 0v18m344-18h-18m18 0v18M28 628h18m-18 0v-18m344 18h-18m18 0v-18" fill="none" stroke="#f5e9cf" stroke-width="2"/>
+      </symbol>
+      <symbol id="gp-paper-door-back" viewBox="0 0 400 650">
+        <path d="M1 0h398v650H0z" fill="#a28c70"/>
+        <path d="m6 5 387 2-2 636-384 2Z" fill="#e9dfc7"/>
+        <path d="m19 22 359-7 5 611-363 8Z" fill="#d0ccb2"/>
+        <path d="m24 17 354 8-7 601-348-3Z" fill="#f2ead8"/>
+        <path d="m43 385 191-18 11 217-196 18Z" fill="#d8ccb1"/>
+        <path d="m37 379 191-18 11 217-196 18Z" fill="url(#gp-paper-print)"/>
+        <path d="M35 35h330v580H35z" fill="none" stroke="#bba788" stroke-width="1.5"/>
+        <path d="M47 49h306v552H47z" fill="none" stroke="#c6b692" stroke-width=".7"/>
+        <path d="m39 41 26 0m-26 0v26m322-26h-26m26 0v26M39 609h26m-26 0v-26m322 26h-26m26 0v-26" fill="none" stroke="#aa8e73"/>
+      </symbol>
+    </defs></svg>
+    <div class="gp-heading">
+      <p class="gp-eyebrow">02 / Ещё одно маленькое чудо</p>
+      <h2 id="gp-title">А за этой дверью —<br><em>целый сад для тебя.</em></h2>
+      <p class="gp-intro">Здесь распускается нежность. И каждый цветок немного похож на любовь.</p>
+    </div>
+    <div class="gp-stage" id="gp-stage">
+      <div class="gp-aura" aria-hidden="true"></div>
+      <div class="gp-architecture" aria-hidden="true">
+        <svg class="gp-roof" viewBox="0 0 1200 240" preserveAspectRatio="none">
+          <path d="M74 52C180 97 259 91 333 77L600 24 867 77c74 14 153 20 259-25-42 57-104 84-185 89H259C178 136 116 109 74 52Z" fill="url(#gp-roof)" stroke="#c29b64" stroke-width="3"/>
+          <path d="M74 52C180 97 259 91 333 77L600 24 867 77c74 14 153 20 259-25M103 83c66 44 132 45 210 35L600 59l287 59c78 10 144 9 210-35" fill="none" stroke="#e0bf85" stroke-width="3"/>
+          <path d="m239 99-15 36m74-42-9 43m72-54-8 54m78-68-6 68m79-83-3 83m99-98v98m99-83 3 83m73-68 6 68m72-54 8 54m63-43 9 43m65-37 15 36" fill="none" stroke="#927152" stroke-width="3"/>
+          <path d="M187 141h826v63H187z" fill="#a47c6c" stroke="#d8c5a4" stroke-width="2"/>
+          <path d="M205 153h790v37H205z" fill="none" stroke="#d6b070"/>
+          <path d="M110 162c56 27 111 32 176 27h628c65 5 120 0 176-27-18 33-61 58-113 61H223c-52-3-95-28-113-61Z" fill="url(#gp-roof)" stroke="#bd935d" stroke-width="2"/>
+          <path d="M110 162c56 27 111 32 176 27h628c65 5 120 0 176-27" fill="none" stroke="#e2bd7f" stroke-width="3"/>
+          <path d="M486 113h228v78H486z" fill="#eee3cb" stroke="url(#gp-gold)" stroke-width="4"/>
+          <path d="M495 122h210v60H495z" fill="none" stroke="#bd935d"/>
+          <text x="600" y="167" text-anchor="middle" font-family="serif" font-size="39" letter-spacing="12" fill="#866b55">花滿庭</text>
+        </svg>
+        <div class="gp-pillar gp-pillar-left"><span>花开有你</span></div><div class="gp-pillar gp-pillar-right"><span>岁岁欢喜</span></div>
+        <div class="gp-stone-step"></div>
+      </div>
+      <div class="gp-doorway">
+        <div class="gp-garden" id="gp-garden" role="region" aria-label="Тайный цветущий сад" aria-hidden="true" tabindex="-1" inert>
+          <div class="gp-world" id="gp-world">
+          <button class="gp-paper-layer gp-paper-sun" id="gp-sun" data-depth="2" data-state="closed" type="button" aria-label="Открыть солнце — за ним ещё один сад" aria-expanded="false" aria-controls="gp-inner-garden" aria-describedby="gp-note">
+            <span class="gp-sun-preview" aria-hidden="true"></span>
+            <span class="gp-sun-leaf gp-sun-leaf-left" aria-hidden="true"><span class="gp-sun-face gp-sun-front"></span><span class="gp-sun-face gp-sun-back"></span></span>
+            <span class="gp-sun-leaf gp-sun-leaf-right" aria-hidden="true"><span class="gp-sun-face gp-sun-front"></span><span class="gp-sun-face gp-sun-back"></span></span>
+            <span class="gp-sun-label" aria-hidden="true"><span class="gp-sun-label-closed">Открой солнце</span><span class="gp-sun-label-open">Войти в сад ↗</span></span>
+          </button>
+          <span class="gp-paper-layer gp-paper-mark" data-depth="2" lang="zh" aria-hidden="true">花 · 庭</span>
+          <div class="gp-paper-layer gp-paper-hills-back" data-depth="3" aria-hidden="true">
+            <svg viewBox="0 0 1000 240" preserveAspectRatio="none"><path d="M-20 237V169L14 171 54 146 101 160 168 128 216 145 259 109 290 123 341 73 380 93 420 65 461 105 507 75 552 104 601 63 644 68 689 102 749 88 791 123 831 101 876 128 923 118 978 152 1020 142V240Z" fill="#d2d4ba"/><path d="m6 176 43-19 50 15 61-29 51 13 48-34 33 14 52-48 35 18 43-27" fill="none" stroke="#eeeada" stroke-width="2" opacity=".55"/></svg>
+          </div>
+          <div class="gp-paper-layer gp-paper-scrap" data-depth="6" aria-hidden="true"><span><b>LE JARDIN</b>La beauté tranquille des fleurs.<br>Les feuilles de papier gardent la lumière du matin. Pivoine, lotus, glycine. Un jardin dans le cœur.<br><br>BOTANIQUE · 29<br>Les pétales, un peu de soleil, et le silence des choses qui fleurissent.<br><br>Hortus · Florilegium<br>Chaque fleur est une petite promesse de printemps.</span></div>
+          <div class="gp-paper-layer gp-paper-hills-front" data-depth="5" aria-hidden="true">
+            <svg viewBox="0 0 1000 270" preserveAspectRatio="none"><path d="M-20 68 27 75 59 65 102 76 143 56 193 77 242 72 278 91 321 96 360 114 411 112 452 132 506 126 549 103 593 116 641 106 684 86 728 77 769 84 805 57 856 53 888 34 928 45 971 39 1020 64V290H-20Z" fill="#a7b396"/><path d="M-20 155 53 139 101 146 153 128 200 134 248 126 311 162 347 156 418 188 461 173 509 185 557 170 618 178 682 148 733 163 784 153 832 169 890 145 942 162 1020 146V290H-20Z" fill="#c1c6a7"/></svg>
+          </div>
+          <div class="gp-paper-layer gp-paper-pavilion" data-depth="6" aria-hidden="true">
+            <svg viewBox="0 0 220 230"><path d="m28 206 165-2 17 15H15Z" fill="#aca38a"/><path d="M46 114h130v91H46z" fill="#d4c8ae"/><path d="M64 124h92v78H64z" fill="#899282"/><path d="M74 127h72v76H74z" fill="#e2d6bc"/><path d="M43 117v90m20-83v81m95-83v83m22-88v90M44 184h133" stroke="#a57768" stroke-width="7"/><path d="M23 111c34 8 56-23 86-61 26 36 54 67 87 59-9 17-32 23-53 20H64c-20 3-35-6-41-18Z" fill="#787f71"/><path d="M15 101c38 5 58-23 94-70 33 45 58 74 94 69-14 18-37 22-55 20H65c-20 1-37-2-50-19Z" fill="#687163"/><path d="M17 100c38 7 57-24 92-69 32 42 57 74 92 69" fill="none" stroke="#a3a88c" stroke-width="3"/><path d="m102 31 7-18 8 18" fill="#8c745c"/><path d="M108 123v25" stroke="#9c765f" stroke-width="2"/><ellipse cx="109" cy="155" rx="9" ry="12" fill="#b67d64"/><path d="M109 164v11" stroke="#b67d64" stroke-width="2"/></svg>
+          </div>
+          <div class="gp-paper-layer gp-paper-pond" data-depth="7" aria-hidden="true">
+            <svg viewBox="0 0 900 250" preserveAspectRatio="none"><path d="m-15 138 44-19 47-3 31-17 61-9 36-22 47-2 32-12 51 1 57-15 52 8 51-5 42 11 66 3 37 13 54 3 41 18 57 9 39 18 29 4V275H-15Z" fill="#b8cec3"/><path d="m23 165 51-20 49-2 55-18 69-3 56-18 71 2 70-10 53 8 55-1 38 8 62-1 54 15 56 4 42 12" fill="none" stroke="#e5e7d5" stroke-width="2"/><path d="M124 184h70m154-50h51m168 46h69m-360 36h97" stroke="#f0eddd" stroke-width="2" opacity=".65"/></svg>
+          </div>
+          <div class="gp-paper-layer gp-paper-path" data-depth="8" aria-hidden="true">
+            <svg viewBox="0 0 400 300" preserveAspectRatio="none"><path d="m282 4 35 5-24 22-41 32-29 30-11 25 8 24 25 35 55 31 40 31 51 61H13l59-61 40-38 58-43 14-20 1-20 21-33 37-29 31-27Z" fill="#e0ceb0"/><path d="m282 12-15 20-46 34-29 35-2 27-16 24-60 43-45 43-57 62" fill="none" stroke="#f4e6c9" stroke-width="3"/></svg>
+          </div>
+          <div class="gp-garden-caption"><span>Бережно собрано для тебя</span><h3>Тихий сад.<em>Большая любовь.</em></h3><p>Пусть в твоём сердце<br>всегда будет место весне.</p></div>
+          <button class="gp-paper-layer gp-flower gp-peony" data-depth="13" type="button" aria-label="Пион: открыть маленькое пожелание" aria-describedby="gp-note" aria-pressed="false" data-flower="peony"><img src="paper-peony.webp" alt="" width="1024" height="1536" loading="lazy" decoding="async"><span class="gp-flower-label">Пион · нежность</span></button>
+          <button class="gp-paper-layer gp-flower gp-lotus" data-depth="10" type="button" aria-label="Лотос: открыть маленькое пожелание" aria-describedby="gp-note" aria-pressed="false" data-flower="lotus"><img src="paper-lotus.webp" alt="" width="1536" height="1024" loading="lazy" decoding="async"><span class="gp-flower-label">Лотос · спокойствие</span></button>
+          <button class="gp-paper-layer gp-flower gp-wisteria" data-depth="11" type="button" aria-label="Глициния: открыть маленькое пожелание" aria-describedby="gp-note" aria-pressed="false" data-flower="wisteria"><img src="paper-wisteria.webp" alt="" width="1024" height="1536" loading="lazy" decoding="async"><span class="gp-flower-label">Глициния · мечты</span></button>
+          <span class="gp-paper-signature" aria-hidden="true">Цвети в своём ритме</span>
+          </div>
+          <section id="gp-inner-garden" class="gp-inner-garden" aria-labelledby="gp-inner-title" aria-hidden="true" inert>
+            <button id="gp-inner-back" class="gp-inner-back" type="button"><span aria-hidden="true">↙</span> Вернуться к солнцу</button>
+            <div class="gp-inner-scene">
+              <div class="gp-nested-halo" aria-hidden="true"></div>
+              <div class="gp-nested-sun" aria-hidden="true"></div>
+              <span class="gp-nested-mark" lang="zh" aria-hidden="true">心 · 花</span>
+              <div class="gp-nested-cloud gp-nested-cloud-one" aria-hidden="true"></div>
+              <div class="gp-nested-cloud gp-nested-cloud-two" aria-hidden="true"></div>
+              <div class="gp-inner-copy gp-inner-caption">
+                <span class="gp-inner-eyebrow">На другой стороне света</span>
+                <h3 id="gp-inner-title" class="gp-inner-title" tabindex="-1">Там, где живёт<em>нежность.</em></h3>
+                <p class="gp-inner-description">Ещё один маленький мир —<br>для твоих тихих счастливых дней.</p>
+                <span class="gp-inner-ornament" aria-hidden="true">✧ &nbsp; ♡ &nbsp; ✧</span>
+              </div>
+              <div class="gp-nested-mountains gp-nested-layer" aria-hidden="true">
+                <svg viewBox="0 0 1000 250" preserveAspectRatio="none"><path d="M-20 249V150l58 8 48-28 48 13 37-35 47 11 52-47 42 15 63-54 46 36 52-22 53 48 45-13 47 37 53-19 64 48 40-8 44 34 48-19 58 46 52-15v158Z" fill="#d6d4bb"/><path d="m140 142 54-34 42 9 53-45 43 15 62-54 46 36" fill="none" stroke="#f3ecda" stroke-width="3" opacity=".8"/><path d="M-15 253V196l85-18 62 14 88-27 67 15 62-18 89 29 71-10 74 26 73-10 81 15 67-18 79 16 44-8v69Z" fill="#c5cbb0"/></svg>
+              </div>
+              <div class="gp-nested-meadow gp-nested-layer" aria-hidden="true">
+                <svg viewBox="0 0 1000 270" preserveAspectRatio="none"><path d="m-20 66 54-7 51 17 63-10 44 15 54-5 47 24 67-5 54 22 59-5 50 15 68-5 46-17 59 6 52-27 65 5 53-21 57 8 49-15 40 16v226H-20Z" fill="#a4b097"/><path d="m-20 153 74-10 81 20 49-10 71 27 90-12 66 29 89-19 64 22 76-20 83 15 69-18 63 9 85-14 60 11v116H-20Z" fill="#bcc3a6"/><path d="m507 179 60-17 63 13 57-12 67 7" fill="none" stroke="#d9dcc3" stroke-width="2"/></svg>
+              </div>
+              <div class="gp-nested-letter" aria-hidden="true"><span class="gp-nested-letter-top">Лист из тёплого сада</span><span class="gp-nested-letter-title">Счастье —<br>в простом.</span><span class="gp-nested-letter-copy">В утреннем свете.<br>В тихом «я рядом».<br>В твоей улыбке.</span><span class="gp-nested-letter-seal">♡</span></div>
+              <div class="gp-nested-path gp-nested-layer" aria-hidden="true">
+                <svg viewBox="0 0 360 300" preserveAspectRatio="none"><path d="m95 3 22 5-6 38 12 26 38 26 49 14 36 27 26 29 10 40 10 42 35 50H38l29-45 23-31 30-30 15-25-4-25-23-24-37-28-10-36 20-27Z" fill="#ddccb0"/><path d="m109 12-11 32 5 26 40 31 62 22 26 25 12 35-4 30-23 33-24 43" fill="none" stroke="#f3e5c9" stroke-width="3"/></svg>
+              </div>
+              <div class="gp-nested-pond gp-nested-layer" aria-hidden="true">
+                <svg viewBox="0 0 1000 280" preserveAspectRatio="none"><path d="M-25 166 8 150l60-10 42-23 59-4 70-28 46-4 48-15 77 6 48-12 69 5 74-12 57 9 53-5 68 16 47-2 57 23 54 3 46 17 44 4 34 20v242H-25Z" fill="#b5cdc2"/><path d="m18 159 89-25 56 1 73-25 65 5 55-16 85 7 69-12 74 5 61-4 63 14 61-4 73 20 82 7" fill="none" stroke="#e4e8d9" stroke-width="2"/><path d="M148 194h87m215-48h86m188 58h63M307 248h74m219-20h130" fill="none" stroke="#edf0df" stroke-width="2" opacity=".75"/></svg>
+              </div>
+              <div class="gp-nested-pavilion gp-nested-layer" aria-hidden="true">
+                <svg viewBox="0 0 230 250"><path d="m30 224 169-1 20 15H12Z" fill="#9fa48b"/><path d="M49 119h133v105H49z" fill="#d7ccb4"/><path d="M70 134h92v91H70z" fill="#899782"/><path d="M79 134h75v91H79z" fill="#f0e3c9"/><path d="M48 121v101m21-85v88m93-88v88m22-104v101M48 199h134" fill="none" stroke="#ad8474" stroke-width="7"/><path d="M17 107c36 7 66-30 99-73 35 44 61 79 99 70-13 20-33 25-60 22H66c-21 1-38-7-49-19Z" fill="#778471"/><path d="M20 105c38 4 62-30 96-72 31 42 59 76 96 71" fill="none" stroke="#aab596" stroke-width="3"/><path d="m108 33 8-19 9 19" fill="#a08c66"/><path d="M115 129v33" stroke="#b5926c" stroke-width="2"/><ellipse cx="115" cy="173" rx="10" ry="13" fill="#c99d75"/><path d="M109 173h12m-6-10v21m0 2v13" stroke="#e6c59c" stroke-width="2"/><path d="M50 217h133" stroke="#efe3c9" stroke-width="3"/></svg>
+              </div>
+              <div class="gp-nested-bridge gp-nested-layer" aria-hidden="true">
+                <svg viewBox="0 0 380 160"><path d="M14 122Q185-36 363 120l-3 21Q187 11 19 143Z" fill="#bba78a"/><path d="M16 118Q183-40 363 118" fill="none" stroke="#eee1c5" stroke-width="5"/><path d="M29 91Q184-52 349 90" fill="none" stroke="#b58b78" stroke-width="7"/><path d="M29 90v30m36-60v38m38-65v38m42-58v36m44-46v35m46-24v36m43-15v39m38-13v37m35-24v31" stroke="#b58b78" stroke-width="6"/><path d="M27 89Q184-55 351 89" fill="none" stroke="#dbb899" stroke-width="2"/><path d="M154 63v-20m18 9V34m20 15V31m21 21V34m20 25V39" stroke="#d5c3a3" stroke-width="2" opacity=".8"/></svg>
+              </div>
+              <figure class="gp-memory gp-memory-flowers">
+                <span class="gp-memory-window"><img src="garden-memory-flowers.jpg" alt="Портрет среди цветов и книг" width="720" height="1280" loading="lazy" decoding="async" draggable="false"></span>
+                <figcaption class="gp-memory-caption">Моя любимая весна</figcaption>
+              </figure>
+              <figure class="gp-memory gp-memory-lamp">
+                <span class="gp-memory-window"><img src="garden-memory-lamp.jpg" alt="Портрет рядом с большой зелёной лампой" width="720" height="1280" loading="lazy" decoding="async" draggable="false"></span>
+                <figcaption class="gp-memory-caption">Счастье — когда ты рядом</figcaption>
+              </figure>
+              <figure class="gp-memory gp-memory-eyes">
+                <span class="gp-memory-window"><img src="garden-memory-eyes.jpg" alt="Крупный план глаз" width="1280" height="311" loading="lazy" decoding="async" draggable="false"></span>
+                <figcaption class="gp-memory-caption">В твоих глазах — мой мир</figcaption>
+              </figure>
+              <span class="gp-inner-dedication gp-inner-caption">Ты — чья-то самая красивая весна.</span>
+              <div class="gp-nested-petals" aria-hidden="true"><i class="gp-nested-petal gp-nested-petal-one"></i><i class="gp-nested-petal gp-nested-petal-two"></i><i class="gp-nested-petal gp-nested-petal-three"></i></div>
+            </div>
+          </section>
+        </div>
+        <div class="gp-door-shadow gp-door-shadow-left" aria-hidden="true"></div><div class="gp-door-shadow gp-door-shadow-right" aria-hidden="true"></div>
+        <div class="gp-leaf gp-leaf-left" aria-hidden="true">
+          <div class="gp-door-face gp-door-front">
+            <svg class="gp-door-art" viewBox="0 0 400 650" preserveAspectRatio="none"><use href="#gp-paper-door-front"/></svg>
+            <img class="gp-door-flower gp-door-front-flower" src="paper-peony.webp" alt="" width="1024" height="1536" loading="lazy" decoding="async" draggable="false">
+            <span class="gp-door-front-label"><small>Маленькое чудо</small><span lang="zh">春</span></span>
+            <span class="gp-door-tape"></span><span class="gp-handle"></span><span class="gp-door-binding"></span>
+          </div>
+          <div class="gp-door-face gp-door-back">
+            <svg class="gp-door-art" viewBox="0 0 400 650" preserveAspectRatio="none"><use href="#gp-paper-door-back"/></svg>
+            <div class="gp-door-back-title"><small>Лист первый / нежность</small><strong>Пусть<br><em>цветёт.</em></strong></div>
+            <img class="gp-door-flower gp-door-back-flower" src="paper-peony.webp" alt="" width="1024" height="1536" loading="lazy" decoding="async" draggable="false">
+            <span class="gp-door-seal" lang="zh">春</span><span class="gp-door-dedication">Всё, что ты любишь.</span><span class="gp-door-tape"></span>
+          </div>
+          <i class="gp-door-edge gp-door-edge-left"></i><i class="gp-door-edge gp-door-edge-right"></i><i class="gp-door-edge gp-door-edge-top"></i><i class="gp-door-edge gp-door-edge-bottom"></i>
+        </div>
+        <div class="gp-leaf gp-leaf-right" aria-hidden="true">
+          <div class="gp-door-face gp-door-front">
+            <svg class="gp-door-art" viewBox="0 0 400 650" preserveAspectRatio="none"><use href="#gp-paper-door-front"/></svg>
+            <img class="gp-door-flower gp-door-front-flower" src="paper-lotus.webp" alt="" width="1536" height="1024" loading="lazy" decoding="async" draggable="false">
+            <span class="gp-door-front-label"><small>Уже совсем рядом</small><span lang="zh">暖</span></span>
+            <span class="gp-door-tape"></span><span class="gp-handle"></span><span class="gp-door-binding"></span>
+          </div>
+          <div class="gp-door-face gp-door-back">
+            <svg class="gp-door-art" viewBox="0 0 400 650" preserveAspectRatio="none"><use href="#gp-paper-door-back"/></svg>
+            <div class="gp-door-back-title"><small>Лист второй / мечты</small><strong>Всё<br><em>сбудется.</em></strong></div>
+            <img class="gp-door-flower gp-door-back-flower" src="paper-wisteria.webp" alt="" width="1024" height="1536" loading="lazy" decoding="async" draggable="false">
+            <span class="gp-door-seal" lang="zh">花</span><span class="gp-door-dedication">В своё прекрасное время.</span><span class="gp-door-tape"></span>
+          </div>
+          <i class="gp-door-edge gp-door-edge-left"></i><i class="gp-door-edge gp-door-edge-right"></i><i class="gp-door-edge gp-door-edge-top"></i><i class="gp-door-edge gp-door-edge-bottom"></i>
+        </div>
+        <button class="gp-door-trigger" id="gp-open" type="button" aria-label="Открыть ворота в цветущий сад" aria-expanded="false" aria-controls="gp-garden"><span class="gp-trigger-label">Открыть сад <span aria-hidden="true">↗</span></span></button>
+      </div>
+    </div>
+    <div class="gp-bottom">
+      <p class="gp-hint" id="gp-hint">Коснись ворот — за ними тебя ждёт красота</p>
+      <div class="gp-open-content" id="gp-open-content" hidden>
+        <div class="gp-flower-choices" aria-label="Цветы и маленькие пожелания">
+          <button type="button" data-flower="peony" aria-describedby="gp-note">✿ Пионы</button>
+          <button type="button" data-flower="lotus" aria-describedby="gp-note">❀ Лотосы</button>
+          <button type="button" data-flower="wisteria" aria-describedby="gp-note">✿ Глициния</button>
+        </div>
+        <p class="gp-note" id="gp-note" role="status" aria-live="polite">Нажми на цветок — он приготовил для тебя несколько тёплых слов.</p>
+        <div class="gp-actions"><button class="gp-close" id="gp-close" type="button">Прикрыть ворота <span aria-hidden="true">↙</span></button></div>
+      </div>
+    </div>
+  </section>
+  <footer class="closing wrap" data-reveal><p>Где бы ни светила луна — я рядом.</p><a href="cosmos.html">Вернуться в волшебный сад <span aria-hidden="true">↗</span></a></footer>
+  <div class="floating-petals" id="floating-petals" aria-hidden="true"></div><div class="launch-sky" id="launch-sky" aria-hidden="true"></div>
+  <script>
+    (() => {
+      const root = document.documentElement;
+      const quietButton = document.getElementById('quiet-mode');
+      const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
+      const petals = document.getElementById('floating-petals');
+      const sky = document.getElementById('launch-sky');
+      const form = document.getElementById('wish-form');
+      const launchButton = document.getElementById('launch-button');
+      const launchLabel = document.getElementById('launch-label');
+      const status = document.getElementById('wish-status');
+      const launchDock = document.getElementById('paper-launch-dock');
+      const launchPreview = document.getElementById('paper-launch-preview');
+      const launchCaption = document.getElementById('paper-launch-caption');
+      const lanternAssets = ['paper-lantern-rose.webp', 'paper-lantern-ivory.webp'];
+      const activeFlights = new Map();
+      let launchCount = 0;
+      let launchGlow = null;
+      let glowTimer;
+      let quiet = motionPreference.matches;
+      let launchTimer;
+      function setQuiet(value) {
+        quiet = value;
+        root.classList.toggle('motion-paused', quiet);
+        quietButton.setAttribute('aria-pressed', String(quiet));
+        quietButton.textContent = quiet ? 'Тихий режим: вкл.' : 'Тихий режим';
+        if (quiet) {
+          stopFlightEffects();
+          finishLaunch();
+        }
+      }
+      setQuiet(quiet);
+      quietButton.addEventListener('click', () => setQuiet(!quiet));
+      const preferenceChanged = event => setQuiet(event.matches);
+      if (motionPreference.addEventListener) motionPreference.addEventListener('change', preferenceChanged);
+      else if (motionPreference.addListener) motionPreference.addListener(preferenceChanged);
+      for (let i = 0; i < 9; i += 1) {
+        const petal = document.createElement('i');
+        petal.className = 'petal';
+        petal.style.left = `${i * 12 + 1}%`;
+        petal.style.setProperty('--duration', `${16 + (i % 4) * 3}s`);
+        petal.style.setProperty('--delay', `${-i * 3.7}s`);
+        petals.appendChild(petal);
+      }
+      function finishLaunch() {
+        window.clearTimeout(launchTimer);
+        launchButton.disabled = false;
+        launchButton.setAttribute('aria-busy', 'false');
+        launchLabel.textContent = launchCount ? 'Отпустить ещё один фонарик' : 'Отпустить фонарик в небо';
+        launchPreview.src = lanternAssets[launchCount % lanternAssets.length];
+        launchDock.classList.toggle('is-releasing', false);
+        launchCaption.textContent = launchCount ? 'Для следующей маленькой мечты.' : 'Этот маленький свет — для тебя.';
+      }
+      function removeFlight(lantern) {
+        window.clearTimeout(activeFlights.get(lantern));
+        activeFlights.delete(lantern);
+        lantern.remove();
+        if (!activeFlights.size) sky.classList.toggle('is-active', false);
+      }
+      function stopFlightEffects() {
+        for (const lantern of activeFlights.keys()) removeFlight(lantern);
+        window.clearTimeout(glowTimer);
+        if (launchGlow) launchGlow.remove();
+        launchGlow = null;
+        sky.classList.toggle('is-active', false);
+      }
+      function addLantern({ x, y, size, endX, flight, wait, index, lead }) {
+        // Two flights may overlap, but repeated launches never grow the DOM indefinitely.
+        while (activeFlights.size >= 16) removeFlight(activeFlights.keys().next().value);
+        const lantern = document.createElement('div');
+        lantern.className = 'sky-lantern';
+        lantern.setAttribute('aria-hidden', 'true');
+        const endY = -size * 1.5 - 90;
+        const properties = {
+          '--size':`${size}px`, '--start-x':`${x}px`, '--start-y':`${y}px`,
+          '--mid-x':`${x + (endX - x) * .57}px`, '--mid-y':`${y + (endY - y) * .46}px`,
+          '--end-x':`${endX}px`, '--end-y':`${endY}px`, '--wait':`${wait}ms`, '--flight':`${flight}ms`,
+          '--start-scale':'1', '--mid-scale':lead ? '.84' : '.71', '--end-scale':lead ? '.3' : '.22',
+          '--sway-time':`${3200 + index * 270}ms`, '--sway-turn':`${index % 2 ? -5 : 5}deg`
+        };
+        Object.entries(properties).forEach(([name, value]) => lantern.style.setProperty(name, value));
+        const sway = document.createElement('div');
+        sway.className = 'paper-lantern-sway';
+        const art = document.createElement('img');
+        art.className = 'paper-lantern-image';
+        art.src = lanternAssets[(launchCount - 1 + index) % lanternAssets.length];
+        art.alt = '';
+        art.width = 1024;
+        art.height = 1536;
+        art.draggable = false;
+        sway.appendChild(art);
+        if (lead) {
+          const tag = document.createElement('span');
+          tag.className = 'paper-lantern-tag';
+          tag.textContent = 'Пусть сбудется';
+          sway.appendChild(tag);
+        }
+        lantern.appendChild(sway);
+        sky.appendChild(lantern);
+        sky.classList.toggle('is-active', true);
+        activeFlights.set(lantern, window.setTimeout(() => removeFlight(lantern), flight + wait + 300));
+        lantern.addEventListener('animationend', event => {
+          if (event.target === lantern && event.animationName === 'paper-lantern-rise') removeFlight(lantern);
+        });
+      }
+      function releasePaperLanterns() {
+        const width = window.innerWidth || 1024;
+        const height = window.innerHeight || 768;
+        const compact = width <= 640;
+        const count = compact ? 5 : 7;
+        const bounds = launchPreview.getBoundingClientRect();
+        const buttonBounds = launchButton.getBoundingClientRect();
+        const visible = bounds.width > 0 && bounds.bottom > 0 && bounds.top < height;
+        const size = visible ? bounds.width : compact ? 82 : 92;
+        const clamp = (value, low, high) => Math.max(low, Math.min(high, value));
+        const x = clamp(visible ? bounds.left : buttonBounds.left, 12, Math.max(12, width - size - 12));
+        const y = clamp(visible ? bounds.top : buttonBounds.top - size, 24, Math.max(24, height - size * 1.5 - 16));
+        addLantern({ x, y, size, endX:clamp(x + (launchCount % 2 ? 1 : -1) * width * .12, 8, width - size - 8), flight:9600, wait:120, index:0, lead:true });
+        for (let i = 1; i < count; i++) {
+          const smallSize = (compact ? 44 : 58) + Math.random() * (compact ? 25 : 40);
+          const lane = (i - .35) / (count - .3);
+          const startX = clamp(width * lane - smallSize / 2, 8, width - smallSize - 8);
+          const drift = (i % 2 ? 1 : -1) * width * (.06 + Math.random() * .07);
+          addLantern({ x:startX, y:height + 18 + (i % 3) * 35, size:smallSize, endX:clamp(startX + drift, 8, width - smallSize - 8), flight:7600 + Math.random() * 2000, wait:350 + i * 270, index:i, lead:false });
+        }
+        window.clearTimeout(glowTimer);
+        if (launchGlow) launchGlow.remove();
+        launchGlow = document.createElement('div');
+        launchGlow.className = 'paper-launch-glow';
+        launchGlow.style.setProperty('--glow-x', `${x + size / 2}px`);
+        launchGlow.style.setProperty('--glow-y', `${y + size * .95}px`);
+        sky.appendChild(launchGlow);
+        glowTimer = window.setTimeout(() => { if (launchGlow) launchGlow.remove(); launchGlow = null; }, 1900);
+        launchDock.classList.toggle('is-releasing', true);
+      }
+      form.addEventListener('submit', event => {
+        event.preventDefault();
+        if (launchButton.disabled) return;
+        launchCount += 1;
+        launchButton.disabled = true;
+        launchButton.setAttribute('aria-busy', 'true');
+        launchLabel.textContent = 'Твоё желание летит к звёздам';
+        launchCaption.textContent = 'Пусть ветер бережно подхватит мечту…';
+        status.textContent = launchCount === 1
+          ? 'Фонарик отпущен. Пусть твоё самое заветное обязательно сбудется ♡'
+          : 'Ещё один бумажный огонёк — ещё одна мечта, которой можно сбыться ♡';
+        const animate = !quiet && !motionPreference.matches && !document.hidden;
+        if (animate) releasePaperLanterns();
+        window.clearTimeout(launchTimer);
+        launchTimer = window.setTimeout(finishLaunch, animate ? 5000 : 900);
+      });
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) { stopFlightEffects(); finishLaunch(); }
+      });
+      window.addEventListener('pagehide', () => { stopFlightEffects(); finishLaunch(); });
+      const envelopeButton = document.getElementById('envelope-button');
+      const letter = document.getElementById('letter-note');
+      const envelope = document.getElementById('envelope');
+      const envelopeStage = document.getElementById('envelope-stage');
+      const letterSection = document.getElementById('letter-section');
+      function measureLetter() {
+        // Reserve real paper height so the unfolded card never overlaps its heading.
+        envelopeStage.style.setProperty('--paper-space', `${Math.ceil(Math.max(letter.offsetHeight + 26, envelope.offsetHeight * .6 + 22))}px`);
+        envelopeStage.style.setProperty('--paper-lift', `${Math.max(0, envelope.offsetHeight - 6)}px`);
+      }
+      function setLetterOpen(open) {
+        measureLetter();
+        if (!open && letter.contains(document.activeElement)) envelopeButton.focus({ preventScroll:true });
+        envelopeButton.setAttribute('aria-expanded', String(open));
+        envelopeButton.setAttribute('aria-label', open ? 'Убрать открытку в конверт' : 'Открыть письмо для Наташи');
+        letterSection.classList.toggle('is-open', open);
+        letter.setAttribute('aria-hidden', String(!open));
+        letter.inert = !open;
+        document.getElementById('envelope-hint').textContent = open ? 'Коснись конверта ещё раз, чтобы сохранить это тепло внутри' : 'Коснись конверта — внутри немного тепла';
+      }
+      envelopeButton.addEventListener('click', () => setLetterOpen(envelopeButton.getAttribute('aria-expanded') !== 'true'));
+      document.getElementById('letter-close').addEventListener('click', () => setLetterOpen(false));
+      letterSection.addEventListener('keydown', event => {
+        if (event.key === 'Escape' && envelopeButton.getAttribute('aria-expanded') === 'true') {
+          event.preventDefault();
+          setLetterOpen(false);
+        }
+      });
+      if ('ResizeObserver' in window) {
+        const paperObserver = new ResizeObserver(measureLetter);
+        paperObserver.observe(letter);
+        paperObserver.observe(envelope);
+      }
+      window.addEventListener('resize', measureLetter);
+      if (document.fonts) document.fonts.ready.then(measureLetter);
+      measureLetter();
+    })();
+  </script>
+  <script src="garden-portal.js" defer></script>
+    <script src="site-polish.js?v=chapter-1" defer></script>
+</body>
+</html>
